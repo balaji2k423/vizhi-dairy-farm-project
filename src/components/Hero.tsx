@@ -17,81 +17,87 @@ const Hero = () => {
 
       {/* Content */}
       <div className="container-custom relative z-10 pt-24">
-        <div className="max-w-2xl">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-full px-4 py-2 mb-8 animate-fade-up">
-            <Leaf className="w-4 h-4 text-gold" />
-            <span className="text-sm text-primary-foreground font-medium">
-              100% Natural & Organic
-            </span>
-          </div>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Content */}
+          <div className="max-w-2xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-full px-4 py-2 mb-8 animate-fade-up">
+              <Leaf className="w-4 h-4 text-gold" />
+              <span className="text-sm text-primary-foreground font-medium">
+                100% Natural & Organic
+              </span>
+            </div>
 
-          {/* Headline */}
-          <h1 className="heading-xl text-primary-foreground mb-6 animate-fade-up delay-100">
-            Pure Dairy
-            <br />
-            <span className="text-gold">From Our Farm</span>
-            <br />
-            To Your Table
-          </h1>
+            {/* Headline */}
+            <h1 className="heading-xl text-primary-foreground mb-6 animate-fade-up delay-100">
+              Pure Dairy
+              <br />
+              <span className="text-gold">From Our Farm</span>
+              <br />
+              To Your DoorStep
+            </h1>
 
-          {/* Subtitle */}
-          <p className="body-lg text-primary-foreground/85 mb-10 animate-fade-up delay-200">
-            Experience the authentic taste of farm-fresh dairy products. 
-            At Vizhi Dairy Farm, we believe in nurturing nature and delivering 
-            purity in every drop.
-          </p>
+            {/* Subtitle with elegant font */}
+            <p 
+              className="body-lg text-primary-foreground/85 mb-10 animate-fade-up delay-200"
+              style={{ fontFamily: "'Lora', 'Georgia', serif" }}
+            >
+              Experience the authentic taste of farm-fresh dairy products. 
+              At Vizhi's Dairy Farm, we believe in nurturing nature and delivering 
+              purity in every drop.
+            </p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-4 mb-16 animate-fade-up delay-300">
-            <Link to="/products" className="btn-hero flex items-center gap-2">
-              Explore Products
-              <ArrowRight size={18} />
-            </Link>
-            <Link to="/about" className="btn-hero-outline">
-              Our Story
-            </Link>
-          </div>
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4 mb-16 animate-fade-up delay-300">
+              <Link to="/products" className="btn-hero flex items-center gap-2">
+                Explore Products
+                <ArrowRight size={18} />
+              </Link>
+              <Link to="/about" className="btn-hero-outline">
+                Our Story
+              </Link>
+            </div>
 
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap gap-8 animate-fade-up delay-400">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center">
-                <Shield className="w-5 h-5 text-gold" />
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap gap-8 animate-fade-up delay-400">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <p className="text-primary-foreground font-semibold">1+ Years</p>
+                  <p className="text-primary-foreground/70 text-sm">of Excellence</p>
+                </div>
               </div>
-              <div>
-                <p className="text-primary-foreground font-semibold">40+ Years</p>
-                <p className="text-primary-foreground/70 text-sm">of Excellence</p>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center">
+                  <Heart className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <p className="text-primary-foreground font-semibold">100+</p>
+                  <p className="text-primary-foreground/70 text-sm">Happy Families</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center">
+                  <Leaf className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <p className="text-primary-foreground font-semibold">100%</p>
+                  <p className="text-primary-foreground/70 text-sm">Natural Products</p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center">
-                <Heart className="w-5 h-5 text-gold" />
-              </div>
-              <div>
-                <p className="text-primary-foreground font-semibold">10,000+</p>
-                <p className="text-primary-foreground/70 text-sm">Happy Families</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-gold" />
-              </div>
-              <div>
-                <p className="text-primary-foreground font-semibold">100%</p>
-                <p className="text-primary-foreground/70 text-sm">Natural Products</p>
-              </div>
-            </div>
           </div>
+
+          
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary-foreground/40 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-primary-foreground/60 rounded-full" />
-        </div>
-      </div>
+      {/* Google Fonts Import */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+      `}</style>
     </section>
   );
 };

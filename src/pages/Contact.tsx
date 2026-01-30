@@ -1,5 +1,7 @@
+import { useSearchParams } from "react-router-dom";
 import { MapPin, Phone, Mail, Clock, Shield, Truck, Award } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import SampleRequestForm from "@/components/SampleRequestForm";
 import SectionHeading from "@/components/SectionHeading";
 
 const contactInfo = [
@@ -32,6 +34,9 @@ const trustBadges = [
 ];
 
 const Contact = () => {
+  const [searchParams] = useSearchParams();
+  const isSampleRequest = searchParams.get("sample") === "true";
+
   return (
     <>
       {/* Hero Section */}
@@ -39,14 +44,17 @@ const Contact = () => {
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <span className="inline-block text-sm font-medium text-accent uppercase tracking-wider mb-4">
-              Get in Touch
+              {isSampleRequest ? "Request a Sample" : "Get in Touch"}
             </span>
             <h1 className="heading-xl text-foreground mb-6">
-              We'd Love to Hear From You
+              {isSampleRequest
+                ? "Try Our Products Risk-Free"
+                : "We'd Love to Hear From You"}
             </h1>
             <p className="body-lg text-muted-foreground">
-              Have questions about our products or want to place an order? 
-              Reach out to us and we'll get back to you within 24 hours.
+              {isSampleRequest
+                ? "Fill out the form below to request a free sample of our fresh dairy products. We'll send your request details via WhatsApp for quick processing."
+                : "Have questions about our products or want to place an order? Reach out to us and we'll get back to you within 24 hours."}
             </p>
           </div>
         </div>
@@ -56,14 +64,14 @@ const Contact = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
+            {/* Contact Form / Sample Request Form */}
             <div>
               <SectionHeading
-                badge="Send a Message"
-                title="Contact Form"
+                badge={isSampleRequest ? "Free Sample" : "Send a Message"}
+                title={isSampleRequest ? "Sample Request Form" : "Contact Form"}
                 align="left"
               />
-              <ContactForm />
+              {isSampleRequest ? <SampleRequestForm /> : <ContactForm />}
             </div>
 
             {/* Contact Info */}

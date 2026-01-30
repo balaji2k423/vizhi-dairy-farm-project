@@ -2,60 +2,55 @@ import { useState } from "react";
 import GalleryGrid from "@/components/GalleryGrid";
 import type { GalleryImage } from "@/types";
 
-import heroFarm from "@/assets/hero-farm.jpg";
-import galleryCows from "@/assets/gallery-cows.jpg";
-import galleryProduction from "@/assets/gallery-production.jpg";
-import galleryNature from "@/assets/gallery-nature.jpg";
-import galleryCare from "@/assets/gallery-care.jpg";
-import productMilk from "@/assets/product-milk.jpg";
-import productGhee from "@/assets/product-ghee.jpg";
+// Import your 6 custom images from assets folder
+// Replace these with your actual image filenames
+import image1 from "@/assets/img1.jpeg";
+import image2 from "@/assets/img2.jpeg";
+import image3 from "@/assets/img3.jpeg";
+import image4 from "@/assets/img4.jpeg";
+import image5 from "@/assets/img5.jpeg";
+import image6 from "@/assets/img6.jpeg";
 
 const allImages: GalleryImage[] = [
   {
     id: "1",
-    src: heroFarm,
-    alt: "Cows grazing in green pastures at sunrise",
+    src: image1,
+    alt: "Vizhis Dairy Farm - Image 1",
     category: "Farm",
   },
   {
     id: "2",
-    src: galleryCows,
-    alt: "Happy cows in our modern barn",
-    category: "Cows",
+    src: image2,
+    alt: "Vizhis Dairy Farm - Image 2",
+    category: "Farm",
   },
   {
     id: "3",
-    src: galleryProduction,
-    alt: "Modern dairy production facility",
-    category: "Production",
+    src: image3,
+    alt: "Vizhis Dairy Farm - Image 3",
+    category: "Farm",
   },
   {
     id: "4",
-    src: galleryNature,
-    alt: "Beautiful sunrise over the farm",
-    category: "Nature",
+    src: image4,
+    alt: "Vizhis Dairy Farm - Image 4",
+    category: "Farm",
   },
   {
     id: "5",
-    src: galleryCare,
-    alt: "Farmer caring for a calf",
-    category: "Cows",
+    src: image5,
+    alt: "Vizhis Dairy Farm - Image 5",
+    category: "Farm",
   },
   {
     id: "6",
-    src: productMilk,
-    alt: "Fresh milk in traditional bottle",
-    category: "Products",
-  },
-  {
-    id: "7",
-    src: productGhee,
-    alt: "Pure golden ghee",
-    category: "Products",
+    src: image6,
+    alt: "Vizhis Dairy Farm - Image 6",
+    category: "Farm",
   },
 ];
 
-const categories = ["All", "Farm", "Cows", "Production", "Nature", "Products"];
+const categories = ["All", "Farm"];
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -78,8 +73,8 @@ const Gallery = () => {
               A Glimpse of Our Farm
             </h1>
             <p className="body-lg text-muted-foreground">
-              Take a visual journey through Vizhi Dairy Farm. From our lush pastures 
-              to our modern facilities, see where your dairy products come from.
+              Take a visual journey through Vizhis Dairy Farm. From our automated facilities 
+              to our happy cows, see where your hygienic dairy products come from.
             </p>
           </div>
         </div>
@@ -88,23 +83,6 @@ const Gallery = () => {
       {/* Gallery Section */}
       <section className="section-padding">
         <div className="container-custom">
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 ${
-                  activeCategory === category
-                    ? "bg-primary text-primary-foreground shadow-soft"
-                    : "bg-card text-foreground hover:bg-muted"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
           {/* Gallery Grid */}
           <GalleryGrid images={filteredImages} />
 
@@ -127,8 +105,8 @@ const Gallery = () => {
               Want to Visit Our Farm?
             </h2>
             <p className="body-lg text-primary-foreground/85 max-w-2xl mx-auto mb-8">
-              We welcome visitors who want to see our farm and learn about sustainable 
-              dairy farming. Schedule a farm tour and meet our happy cows!
+              We welcome visitors who want to see our automated dairy facility and learn 
+              about modern, hygienic dairy farming. Schedule a farm tour today!
             </p>
             <a
               href="/contact"
