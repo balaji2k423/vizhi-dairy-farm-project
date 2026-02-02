@@ -44,7 +44,7 @@ const DairyScan = () => {
 
   // Your Google Sheet ID - Get this from your Google Sheet URL
   // URL looks like: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit
-  const SHEET_ID = "1jwt5czqhBlrovP3B5X46ZPcsPO4kylQMZf1xQeBSdvs";
+  const SHEET_ID = "15oe1qIwvrJgJEr5fCRT73j9aRVzVQY9WdSQ-HmbEW_0";
   
   // The name of your sheet tab (usually "Sheet1" or "Form Responses 1")
   const SHEET_NAME = "Form Responses 1";
