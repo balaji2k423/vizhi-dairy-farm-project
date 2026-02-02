@@ -5,12 +5,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SamplePopup from "@/components/SamplePopup";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Products from "@/pages/Products";
 import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
+import DairyScan from "@/pages/DairyScan";
 
 const queryClient = new QueryClient();
 
@@ -28,11 +30,13 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/products" element={<Products />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/dairyscan" element={<DairyScan />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />
+          <SamplePopup />
         </div>
       </BrowserRouter>
     </TooltipProvider>

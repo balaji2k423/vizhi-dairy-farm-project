@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import { Droplets, Truck, Award, Users, ArrowRight } from "lucide-react";
+import { Droplets, Truck, Award, Users, ArrowRight, Bot, Sparkles } from "lucide-react";
 import Hero from "@/components/Hero";
 import SectionHeading from "@/components/SectionHeading";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/types";
 
-import productMilk from "@/assets/product-milk.jpg";
+import productMilk from "@/assets/milkbottle.png";
 import productCurd from "@/assets/product-curd.jpg";
-import productGhee from "@/assets/product-ghee.jpg";
-import galleryCare from "@/assets/gallery-care.jpg";
+import galleryCare from "@/assets/img6.jpeg";
 
 const featuredProducts: Product[] = [
   {
@@ -18,7 +17,7 @@ const featuredProducts: Product[] = [
     price: "₹60/Litre",
     image: productMilk,
     category: "Milk",
-    badge: "Bestseller",
+    badge: "Available Now",
   },
   {
     id: "2",
@@ -27,23 +26,20 @@ const featuredProducts: Product[] = [
     price: "₹80/500g",
     image: productCurd,
     category: "Curd",
-  },
-  {
-    id: "3",
-    name: "Pure Desi Ghee",
-    description: "Golden, aromatic ghee made from the finest butter using bilona method.",
-    price: "₹650/500g",
-    image: productGhee,
-    category: "Ghee",
-    badge: "Premium",
+    badge: "Available Now",
   },
 ];
 
 const features = [
   {
-    icon: Droplets,
-    title: "100% Pure & Natural",
-    description: "No preservatives, no additives. Just pure, wholesome dairy goodness.",
+    icon: Bot,
+    title: "100% Automated Processing",
+    description: "Zero human contact throughout the entire production process for maximum hygiene.",
+  },
+  {
+    icon: Sparkles,
+    title: "Maximum Hygiene Standards",
+    description: "Hospital-grade cleanliness maintained through continuous automated sanitization.",
   },
   {
     icon: Truck,
@@ -53,12 +49,7 @@ const features = [
   {
     icon: Award,
     title: "Quality Certified",
-    description: "FSSAI certified with rigorous quality checks at every step.",
-  },
-  {
-    icon: Users,
-    title: "Ethical Farming",
-    description: "Our cows are treated with love and care in natural environments.",
+    description: "Rigorous quality checks at every automated step ensure perfect products.",
   },
 ];
 
@@ -73,8 +64,8 @@ const Home = () => {
         <div className="container-custom">
           <SectionHeading
             badge="Why Choose Us"
-            title="The Vizhi Difference"
-            subtitle="We're committed to bringing you the purest dairy products while caring for our animals and the environment."
+            title="The Vizhis Difference"
+            subtitle="We're revolutionizing dairy hygiene with complete automation and zero human contact."
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -103,10 +94,10 @@ const Home = () => {
           <SectionHeading
             badge="Our Products"
             title="Farm Fresh Dairy"
-            subtitle="Discover our range of premium dairy products, crafted with care and delivered fresh to your home."
+            subtitle="Discover our premium dairy products, processed with 100% automation and zero human touch."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -133,13 +124,13 @@ const Home = () => {
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
                 <img
                   src={galleryCare}
-                  alt="Farmer caring for calf at Vizhi Dairy Farm"
+                  alt="Modern automated dairy facility at Vizhis Dairy Farm"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-card rounded-2xl p-6 shadow-card hidden md:block">
-                <p className="font-serif text-3xl font-bold text-primary">40+</p>
-                <p className="text-muted-foreground text-sm">Years of Trust</p>
+                <p className="font-serif text-3xl font-bold text-primary">2025</p>
+                <p className="text-muted-foreground text-sm">Established</p>
               </div>
             </div>
 
@@ -147,18 +138,18 @@ const Home = () => {
             <div>
               <SectionHeading
                 badge="Our Story"
-                title="A Legacy of Purity Since 1985"
+                title="A New Era of Dairy Hygiene"
                 align="left"
               />
               <p className="body-md text-muted-foreground mb-6">
-                Vizhi Dairy Farm was founded with a simple vision: to bring the purest, 
-                freshest dairy products from our family farm to your table. What started 
-                as a small operation has grown into a trusted name in premium dairy.
+                Vizhis Dairy Farm represents the future of dairy production. As an emerging 
+                dairy farm established in 2025, we've embraced cutting-edge automation technology 
+                to ensure the highest standards of hygiene and safety.
               </p>
               <p className="body-md text-muted-foreground mb-8">
-                Our commitment to ethical farming, sustainable practices, and 
-                uncompromising quality has made us the preferred choice for families 
-                who care about what they consume.
+                Our commitment to zero human contact processing, combined with ethical 
+                farming practices, makes us the new standard in premium dairy products. 
+                We're building trust one bottle at a time.
               </p>
               <Link to="/about" className="btn-hero inline-flex items-center gap-2">
                 Learn More
@@ -174,11 +165,11 @@ const Home = () => {
         <div className="absolute inset-0 bg-pattern-dots opacity-5" />
         <div className="container-custom relative z-10 text-center">
           <h2 className="heading-lg text-primary-foreground mb-6">
-            Ready to Taste the Difference?
+            Ready to Experience Pure Hygiene?
           </h2>
           <p className="body-lg text-primary-foreground/85 max-w-2xl mx-auto mb-10">
-            Join thousands of happy families who trust Vizhi Dairy Farm for their 
-            daily dairy needs. Order now and experience farm-fresh goodness.
+            Join families who are choosing the safest, most hygienic dairy products. 
+            Order now and experience 100% automated, touchless processing.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/products" className="btn-hero-outline bg-primary-foreground/10">

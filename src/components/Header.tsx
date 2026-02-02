@@ -4,9 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import type { NavItem } from "@/types"; // adjust path if needed
 
-// Recommended Google Fonts (add to index.html <head> if not already):
-// <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700&family=Satisfy&display=swap" rel="stylesheet">
-
 const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
@@ -35,45 +32,42 @@ const Header = () => {
     setIsMenuOpen(false);
   }, [location]);
 
-  // Show logo when: scrolled on homepage OR on any other page
-  const showLogo = (isScrolled && isHomePage) || !isHomePage;
+  // Show old logo when: scrolled on homepage OR on any other page
+  const showOldLogo = (isScrolled && isHomePage) || !isHomePage;
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
         isScrolled || !isHomePage
           ? "bg-white/95 backdrop-blur-md shadow-sm py-2.5 border-b border-gray-100"
-          : "bg-transparent py-4"
+          : "bg-transparent py-6"
       }`}
     >
       <div className="container mx-auto px-5 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
-          {/* ── Logo / Text Brand ── */}
-          <Link to="/" className="flex items-center gap-3 group">
-            {showLogo ? (
-              // Show logo when scrolled or on other pages
-              <img 
-                src="/logo.png" 
-                alt="Vizhis Dairy Farm Logo" 
-                className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-all duration-300"
-              />
-            ) : (
-              // Show text logo on homepage before scroll
-              <div className="flex flex-col leading-none">
-                <span
-                  className={`
-                    font-['Dancing_Script'] font-bold tracking-tight text-gray-900 
-                    group-hover:text-emerald-700 transition-colors
-                    text-3xl sm:text-4xl md:text-4xl lg:text-5xl
-                  `}
-                >
-                  Vizhis
-                </span>
-                <span className="text-xs sm:text-sm md:text-base font-medium tracking-wider uppercase text-gray-900 mt-0.5">
-                  Dairy Farm
-                </span>
-              </div>
-            )}
+          {/* ── Logo with Smooth Cross-Fade Transition ── */}
+          <Link to="/" className="flex items-center gap-3 group relative">
+            {/* New Logo (homepage before scroll) */}
+            <img 
+              src="/logo1.png" 
+              alt="Vizhis Dairy Farm Logo" 
+              className={`h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain transition-all duration-700 ease-in-out ${
+                showOldLogo 
+                  ? 'opacity-0 scale-75 absolute' 
+                  : 'opacity-100 scale-100 relative'
+              }`}
+            />
+            
+            {/* Old Logo (scrolled or other pages) */}
+            <img 
+              src="/logo.png" 
+              alt="Vizhis Dairy Farm Logo" 
+              className={`h-12 sm:h-14 md:h-16 w-auto object-contain transition-all duration-700 ease-in-out ${
+                showOldLogo 
+                  ? 'opacity-100 scale-100 relative' 
+                  : 'opacity-0 scale-125 absolute'
+              }`}
+            />
           </Link>
 
           {/* ── Desktop Navigation – smaller & tighter ── */}

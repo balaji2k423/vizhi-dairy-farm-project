@@ -1,8 +1,9 @@
 import { Leaf, Heart, Shield, Bot, Users, Droplets, Sparkles, Zap, CheckCircle, Lock } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
-import galleryCare from "@/assets/gallery-care.jpg";
-import galleryCows from "@/assets/gallery-cows.jpg";
-import galleryNature from "@/assets/gallery-nature.jpg";
+// Import your custom images - replace with your actual image filenames
+import aboutImage1 from "@/assets/img6.jpeg";
+import aboutImage2 from "@/assets/img5.jpeg";
+import aboutImage3 from "@/assets/milkbottle.png";
 
 const values = [
   {
@@ -30,8 +31,8 @@ const values = [
 const automationFeatures = [
   {
     icon: Bot,
-    title: "Robotic Milking Systems",
-    description: "State-of-the-art robotic arms milk our cows gently and hygienically, monitored 24/7 by AI systems.",
+    title: "Automated Milking Systems",
+    description: "State-of-the-art automated systems milk our cows gently and hygienically, monitored continuously 24/7.",
   },
   {
     icon: Lock,
@@ -45,7 +46,7 @@ const automationFeatures = [
   },
   {
     icon: CheckCircle,
-    title: "AI Quality Testing",
+    title: "Quality Testing",
     description: "Advanced sensors continuously monitor quality parameters, rejecting any batch that doesn't meet standards.",
   },
   {
@@ -56,7 +57,7 @@ const automationFeatures = [
   {
     icon: Droplets,
     title: "Touchless Bottling",
-    description: "Robotic arms fill, seal, and package products in a completely sterile, human-free environment.",
+    description: "Automated systems fill, seal, and package products in a completely sterile, human-free environment.",
   },
 ];
 
@@ -67,8 +68,31 @@ const hygieneStandards = [
   "HEPA Air Filtration Systems",
   "Real-Time Contamination Monitoring",
   "Sealed Production Environment",
-  "Robotic Quality Inspection",
+  "Automated Quality Inspection",
   "Temperature-Controlled Storage",
+];
+
+const processSteps = [
+  {
+    number: "01",
+    title: "Automated Collection",
+    description: "Milk is collected using advanced automated systems that ensure gentle, stress-free extraction from our healthy cows.",
+  },
+  {
+    number: "02",
+    title: "Instant Processing",
+    description: "Within minutes, milk enters our sealed processing facility where it's immediately cooled and prepared.",
+  },
+  {
+    number: "03",
+    title: "Quality Verification",
+    description: "Multiple automated checks ensure every drop meets our strict purity and safety standards.",
+  },
+  {
+    number: "04",
+    title: "Sterile Packaging",
+    description: "Products are packaged in a completely sealed environment, maintaining freshness from farm to fridge.",
+  },
 ];
 
 const About = () => {
@@ -88,9 +112,9 @@ const About = () => {
               100% Automated • Zero Human Touch • Maximum Hygiene
             </p>
             <p className="body-lg text-muted-foreground">
-              Welcome to Vizhis Dairy Farm - where cutting-edge robotics and AI ensure 
-              the most hygienic dairy products ever produced. Every step from milking to 
-              packaging is handled entirely by machines, guaranteeing unprecedented purity.
+              Welcome to Vizhis Dairy Farm - where cutting-edge automation ensures 
+              the most hygienic dairy products ever produced. Every step from milking 
+              to packaging is handled entirely by machines, guaranteeing unprecedented purity.
             </p>
           </div>
         </div>
@@ -149,8 +173,8 @@ const About = () => {
                 <div className="space-y-4">
                   <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-card">
                     <img
-                      src={galleryCare}
-                      alt="Automated dairy farm"
+                      src={aboutImage1}
+                      alt="Automated dairy processing"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -158,15 +182,15 @@ const About = () => {
                 <div className="space-y-4 pt-8">
                   <div className="aspect-square rounded-2xl overflow-hidden shadow-card">
                     <img
-                      src={galleryCows}
-                      alt="Happy cows at Vizhi Dairy"
+                      src={aboutImage2}
+                      alt="Modern dairy facility"
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-card">
                     <img
-                      src={galleryNature}
-                      alt="Modern dairy facility"
+                      src={aboutImage3}
+                      alt="Quality dairy products"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -185,13 +209,13 @@ const About = () => {
                 <p className="body-md">
                   Vizhis Dairy Farm represents a complete revolution in dairy production. 
                   We've eliminated all human contact from our processing chain through 
-                  <strong className="text-foreground"> advanced robotics and artificial intelligence</strong>.
+                  <strong className="text-foreground"> advanced automated systems</strong>.
                 </p>
                 <p className="body-md">
                   From the moment milk leaves the cow to when it arrives at your doorstep, 
                   <strong className="text-foreground"> not a single human hand touches your product</strong>. 
                   Our facility operates like a high-tech laboratory, with machines handling every step 
-                  under constant AI monitoring.
+                  under constant monitoring.
                 </p>
                 <p className="body-md">
                   This isn't just automation - it's a <strong className="text-foreground">complete reimagining 
@@ -212,10 +236,37 @@ const About = () => {
                 </div>
                 <div>
                   <p className="font-serif text-3xl font-bold text-primary">24/7</p>
-                  <p className="text-muted-foreground text-sm mt-1">AI Monitoring</p>
+                  <p className="text-muted-foreground text-sm mt-1">Monitoring</p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Process Steps Section - NEW */}
+      <section className="section-padding bg-gradient-soft">
+        <div className="container-custom">
+          <SectionHeading
+            badge="Our Process"
+            title="From Farm to Your Table"
+            subtitle="See how we maintain the highest standards of hygiene at every step of production."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {processSteps.map((step) => (
+              <div key={step.number} className="text-center">
+                <div className="relative mb-6">
+                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
+                    <span className="text-3xl font-bold text-primary">{step.number}</span>
+                  </div>
+                </div>
+                <h3 className="font-serif font-semibold text-xl mb-3">{step.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -288,7 +339,7 @@ const About = () => {
               <div className="bg-card rounded-2xl p-8 text-center shadow-soft">
                 <Bot className="w-12 h-12 text-primary mx-auto mb-4" />
                 <p className="text-4xl font-bold text-primary mb-2">12+</p>
-                <p className="text-sm text-muted-foreground">Robotic Systems</p>
+                <p className="text-sm text-muted-foreground">Automated Systems</p>
               </div>
 
               <div className="bg-card rounded-2xl p-8 text-center shadow-soft">
@@ -357,7 +408,7 @@ const About = () => {
                 <h3 className="font-serif font-semibold text-xl">Complete Contamination Prevention</h3>
               </div>
               <p className="text-muted-foreground mb-4">
-                Human hands, even when gloved, can carry bacteria and contaminants. Our robotic 
+                Human hands, even when gloved, can carry bacteria and contaminants. Our automated 
                 systems are sterilized after every cycle, ensuring zero contamination risk.
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
@@ -432,7 +483,7 @@ const About = () => {
                 <h3 className="font-serif font-semibold text-xl">Real-Time Quality Monitoring</h3>
               </div>
               <p className="text-muted-foreground mb-4">
-                AI-powered sensors continuously test every parameter. Any deviation, no matter 
+                Advanced sensors continuously test every parameter. Any deviation, no matter 
                 how small, triggers immediate rejection of that batch.
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
@@ -467,7 +518,7 @@ const About = () => {
             </p>
             <p className="body-lg text-primary-foreground/85 mb-12">
               Every bottle carries our guarantee: processed entirely by machines in a sealed, 
-              sterilized environment, monitored by AI, and delivered with unprecedented purity.
+              sterilized environment, monitored continuously, and delivered with unprecedented purity.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

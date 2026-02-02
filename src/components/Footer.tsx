@@ -1,66 +1,82 @@
+// src/components/layout/Footer.tsx
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react";
 
+// Logo import (choose one based on your folder structure)
+// Option 1: src/assets
+import logo from "@/assets/logo2.jpg";
+
+// Option 2: public folder (no import needed)
+// const logoPath = "/vizhis-logo.png";
+
 const Footer = () => {
+  // Function to scroll to top smoothly when clicking footer links
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="bg-sage-dark text-primary-foreground">
-      <div className="container-custom section-padding pb-8">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand Column */}
+      <div className="container-custom py-12 md:py-16">
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 lg:gap-16 mb-12 md:mb-16">
+          {/* Brand & Description */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-primary-foreground/20 flex items-center justify-center">
-                <span className="text-primary-foreground font-serif font-bold text-xl">V</span>
+            <Link to="/" className="flex items-center gap-3.5 mb-6 group">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden bg-primary-foreground/10 flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg shadow-md">
+                <img
+                  src={logo}
+                  // src="/vizhis-logo.png"   // ← Use this if logo is in public folder
+                  alt="Vizhis Dairy Farm Logo"
+                  className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                />
               </div>
-              <div className="flex flex-col">
-                <span className="font-serif font-semibold text-xl leading-tight">
-                  Vizhi Dairy
+
+              <div className="flex flex-col leading-tight">
+                <span className="font-serif font-bold text-2xl md:text-2.5xl text-white tracking-tight">
+                  Vizhis
                 </span>
-                <span className="text-xs text-primary-foreground/70 tracking-wide uppercase">
-                  Farm Fresh Since 1985
+                <span className="text-xs md:text-sm text-emerald-300/90 tracking-wider uppercase font-medium">
+                  Dairy Farm
                 </span>
               </div>
             </Link>
-            <p className="text-primary-foreground/80 leading-relaxed mb-6">
-              Bringing you the purest dairy products straight from our farm to your table.
-              Quality you can trust, freshness you can taste.
+
+            <p className="text-primary-foreground/75 leading-relaxed mb-8 text-sm md:text-base">
+              Pure, fresh dairy straight from our farm to your home. 
+              Trusted quality since 2025.
             </p>
+
             <div className="flex gap-4">
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={18} />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram size={18} />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter size={18} />
-              </a>
+              {[
+                { icon: Facebook, label: "Facebook" },
+                { icon: Instagram, label: "Instagram" },
+                { icon: Twitter, label: "Twitter" },
+              ].map(({ icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-emerald-600/40 transition-all duration-300 hover:scale-110"
+                  aria-label={label}
+                >
+                  <Icon size={18} className="text-white" />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-6">Quick Links</h4>
-            <ul className="space-y-3">
+            <h4 className="font-serif font-semibold text-lg md:text-xl mb-6 text-white">Quick Links</h4>
+            <ul className="space-y-3 text-sm md:text-base">
               {["Home", "About Us", "Products", "Gallery", "Contact"].map((item) => (
                 <li key={item}>
                   <Link
-                    to={`/${item === "Home" ? "" : item === "About Us" ? "about" : item.toLowerCase()}`}
-                    className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                    to={`/${item === "Home" ? "" : item.toLowerCase().replace(" ", "-")}`}
+                    className="text-primary-foreground/75 hover:text-emerald-300 transition-colors duration-200 flex items-center gap-2"
+                    onClick={scrollToTop} // ← Scroll to top on click
                   >
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
                     {item}
                   </Link>
                 </li>
@@ -70,14 +86,16 @@ const Footer = () => {
 
           {/* Products */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-6">Our Products</h4>
-            <ul className="space-y-3">
+            <h4 className="font-serif font-semibold text-lg md:text-xl mb-6 text-white">Our Products</h4>
+            <ul className="space-y-3 text-sm md:text-base">
               {["Fresh Milk", "Natural Curd", "Pure Ghee", "Farm Butter", "Paneer"].map((item) => (
                 <li key={item}>
                   <Link
                     to="/products"
-                    className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                    className="text-primary-foreground/75 hover:text-emerald-300 transition-colors duration-200 flex items-center gap-2"
+                    onClick={scrollToTop} // ← Scroll to top on click
                   >
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
                     {item}
                   </Link>
                 </li>
@@ -87,29 +105,30 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-6">Contact Us</h4>
-            <ul className="space-y-4">
+            <h4 className="font-serif font-semibold text-lg md:text-xl mb-6 text-white">Contact Us</h4>
+            <ul className="space-y-5 text-sm md:text-base">
               <li className="flex items-start gap-3">
-                <MapPin size={20} className="text-gold mt-1 flex-shrink-0" />
+                <MapPin size={20} className="text-emerald-400 mt-1 flex-shrink-0" />
                 <span className="text-primary-foreground/80">
-                  123 Farm Road, Green Valley,<br />
-                  Tamil Nadu, India - 600001
+                  Annur Rd, to, Somanur Rd,<br />
+                  Karumathampatti, Kaduvettipalayam,<br />
+                  Coimbatore, Tamil Nadu 641659
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone size={20} className="text-gold flex-shrink-0" />
+                <Phone size={20} className="text-emerald-400 flex-shrink-0" />
                 <a
-                  href="tel:+919876543210"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  href="tel:+918680050504"
+                  className="text-primary-foreground/80 hover:text-emerald-300 transition-colors"
                 >
-                  +91 98765 43210
+                  +91 86800 50504
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail size={20} className="text-gold flex-shrink-0" />
+                <Mail size={20} className="text-emerald-400 flex-shrink-0" />
                 <a
                   href="mailto:info@vizhidairy.com"
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  className="text-primary-foreground/80 hover:text-emerald-300 transition-colors"
                 >
                   info@vizhidairy.com
                 </a>
@@ -119,16 +138,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-primary-foreground/20">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-primary-foreground/60 text-sm">
-              © 2025 Vizhi Dairy Farm. All rights reserved.
+        <div className="pt-8 border-t border-primary-foreground/15">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/60">
+            <p>
+              © {new Date().getFullYear()} Vizhis Dairy Farm. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-emerald-300 transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+              <a href="#" className="hover:text-emerald-300 transition-colors">
                 Terms of Service
               </a>
             </div>

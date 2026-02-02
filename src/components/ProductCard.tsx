@@ -7,12 +7,12 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <article className="product-card group">
-      {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden bg-cream">
+      {/* Image Container – taller aspect for bottles */}
+      <div className="relative aspect-[3/4] overflow-hidden bg-cream rounded-t-xl"> {/* ← changed to aspect-[3/4] or try aspect-[4/5] */}
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-contain p-6 transition-transform duration-700 group-hover:scale-105" // ← object-contain + padding
         />
         {product.badge && (
           <span className="absolute top-4 left-4 bg-accent text-accent-foreground text-xs font-medium px-3 py-1 rounded-full">

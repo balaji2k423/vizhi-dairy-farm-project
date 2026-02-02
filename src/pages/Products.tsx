@@ -1,3 +1,4 @@
+// src/pages/Products.tsx
 import SectionHeading from "@/components/SectionHeading";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/types";
@@ -6,29 +7,61 @@ import productCurd from "@/assets/product-curd.jpg";
 import productGhee from "@/assets/product-ghee.jpg";
 import productButter from "@/assets/product-butter.jpg";
 import productPaneer from "@/assets/product-paneer.jpg";
-import { Clock, Sparkles, Shield, Leaf } from "lucide-react";
+import { Clock, Sparkles, Shield, Leaf, Droplet } from "lucide-react";
 
-const availableProducts: Product[] = [
+// Milk variants with different fat percentages + Curd
+const milkVariants = [
   {
-    id: "1",
-    name: "Farm Fresh Milk",
-    description: "Pure, unprocessed whole milk delivered fresh from our happy, grass-fed cows. Rich in nutrients and natural flavor.",
-    price: "₹60/Litre",
+    name: "Double Toned Milk",
+    fat: "1.5% Fat",
+    description: "Light & healthy – low-fat option for calorie-conscious diets",
+    price: "₹45 / Litre",
+    icon: Leaf,
     image: productMilk,
-    category: "Milk",
-    badge: "Available Now",
   },
   {
-    id: "2",
+    name: "Toned Milk",
+    fat: "3% Fat",
+    description: "Balanced nutrition – perfect for daily consumption",
+    price: "₹50 / Litre",
+    icon: Shield,
+    image: productMilk,
+  },
+  {
+    name: "Standardized Milk",
+    fat: "3.5% Fat",
+    description: "Rich & creamy – ideal for tea, coffee & household use",
+    price: "₹55 / Litre",
+    icon: Droplet,
+    image: productMilk,
+  },
+  {
+    name: "Full Cream Milk",
+    fat: "4% Fat",
+    description: "Extra creamy & nutritious – great for growing kids",
+    price: "₹58 / Litre",
+    icon: Sparkles,
+    image: productMilk,
+  },
+  {
+    name: "Gold Milk (High Fat)",
+    fat: "4.5% Fat",
+    description: "Premium rich milk – luxurious taste & texture",
+    price: "₹62 / Litre",
+    icon: Sparkles,
+    image: productMilk,
+  },
+  {
     name: "Natural Curd",
-    description: "Creamy, probiotic-rich curd made using traditional fermentation methods. Perfect for your daily meals.",
-    price: "₹80/500g",
+    fat: "From Full Cream Milk",
+    description: "Thick, creamy, probiotic-rich curd made traditionally",
+    price: "₹80 / 500g",
+    icon: Droplet,
     image: productCurd,
-    category: "Curd",
-    badge: "Available Now",
   },
 ];
 
+// Coming Soon products (unchanged)
 const comingSoonProducts = [
   {
     id: "3",
@@ -64,33 +97,6 @@ const comingSoonProducts = [
   },
 ];
 
-const milkVariants = [
-  {
-    name: "Whole Milk",
-    fat: "6% Fat",
-    description: "Full cream milk with natural richness",
-    price: "₹60/Litre",
-    icon: Sparkles,
-    image: productMilk, // Replace with actual image path from assets
-  },
-  {
-    name: "Toned Milk",
-    fat: "3% Fat",
-    description: "Balanced nutrition with reduced fat",
-    price: "₹50/Litre",
-    icon: Shield,
-    image: productMilk, // Replace with actual image path from assets
-  },
-  {
-    name: "Double Toned Milk",
-    fat: "1.5% Fat",
-    description: "Low-fat option for health-conscious",
-    price: "₹45/Litre",
-    icon: Leaf,
-    image: productMilk, // Replace with actual image path from assets
-  },
-];
-
 const Products = () => {
   return (
     <>
@@ -112,75 +118,68 @@ const Products = () => {
         </div>
       </section>
 
-      {/* All Products Section */}
+      {/* Milk & Curd Variants – Main Products */}
       <section className="section-padding">
         <div className="container-custom">
           <SectionHeading
-            badge="Available Now"
-            title="Our Current Offerings"
-            subtitle="Premium quality dairy products processed with complete automation and zero human touch."
+            badge="Fresh Daily"
+            title="Our Milk & Curd Range"
+            subtitle="Different fat levels to suit every need – all processed with complete automation and zero human touch."
           />
 
-          {/* Milk Variants */}
-          <div className="mb-20">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {milkVariants.map((variant) => (
-                <div
-                  key={variant.name}
-                  className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2"
-                >
-                  <div className="relative h-64 overflow-hidden bg-sage-light">
-                    <img
-                      src={variant.image}
-                      alt={variant.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold">
-                      Available Now
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                        <variant.icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-serif font-semibold text-xl">
-                          {variant.name}
-                        </h3>
-                        <p className="text-sm text-primary font-medium">{variant.fat}</p>
-                      </div>
-                    </div>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      {variant.description}
-                    </p>
-                    <div className="flex items-center justify-between pt-4 border-t border-border">
-                      <span className="text-xl font-semibold text-foreground">
-                        {variant.price}
-                      </span>
-                      <a
-                        href="/contact"
-                        className="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
-                      >
-                        Order Now
-                      </a>
-                    </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {milkVariants.map((variant) => (
+              <div
+                key={variant.name}
+                className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2 group"
+              >
+                {/* Image – fixed display issue */}
+                <div className="relative h-72 overflow-hidden bg-sage-light flex items-center justify-center p-6">
+                  <img
+                    src={variant.image}
+                    alt={variant.name}
+                    className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold">
+                    Available Now
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Other Available Products */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {availableProducts.filter(p => p.category !== 'Milk').map((product) => (
-              <ProductCard key={product.id} product={product} />
+                {/* Content */}
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <variant.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-semibold text-xl">
+                        {variant.name}
+                      </h3>
+                      <p className="text-sm text-primary font-medium">{variant.fat}</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground text-sm mb-6 line-clamp-2">
+                    {variant.description}
+                  </p>
+                  <div className="flex items-center justify-between pt-4 border-t border-border">
+                    <span className="text-xl font-semibold text-foreground">
+                      {variant.price}
+                    </span>
+                    <a
+                      href="/contact"
+                      className="px-5 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
+                    >
+                      Order Now
+                    </a>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Coming Soon Section */}
+      {/* Coming Soon Section – unchanged */}
       <section className="section-padding bg-sage-light">
         <div className="container-custom">
           <SectionHeading
@@ -195,13 +194,11 @@ const Products = () => {
                 key={product.id}
                 className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2 relative"
               >
-                {/* Coming Soon Badge */}
                 <div className="absolute top-4 right-4 z-10 bg-accent text-primary-foreground px-4 py-2 rounded-full text-xs font-semibold flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   Coming Soon
                 </div>
 
-                {/* Image with Overlay */}
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={product.image}
@@ -211,7 +208,6 @@ const Products = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </div>
 
-                {/* Content */}
                 <div className="p-6">
                   <h3 className="font-serif font-semibold text-xl mb-2">
                     {product.name}
@@ -252,7 +248,7 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Quality Banner */}
+      {/* Quality Banner – unchanged */}
       <section className="section-padding bg-gradient-hero">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -316,10 +312,10 @@ const Products = () => {
 
               <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-8 text-center">
                 <p className="text-5xl font-bold text-primary-foreground mb-2">
-                  5
+                  6
                 </p>
                 <p className="text-primary-foreground/80 text-sm">
-                  Products Available
+                  Variants Available
                 </p>
               </div>
             </div>
@@ -327,7 +323,7 @@ const Products = () => {
         </div>
       </section>
 
-      {/* How to Order Section */}
+      {/* How to Order Section – unchanged */}
       <section className="section-padding">
         <div className="container-custom">
           <SectionHeading
@@ -345,7 +341,7 @@ const Products = () => {
                 Call or WhatsApp
               </h3>
               <p className="text-muted-foreground text-sm">
-                Reach us directly at +91 98765 43210 to place your order
+                Reach us directly at +91 86800 50504 to place your order
               </p>
             </div>
 

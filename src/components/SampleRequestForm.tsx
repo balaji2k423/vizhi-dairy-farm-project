@@ -1,21 +1,30 @@
 import { useState, FormEvent } from "react";
 import { Send } from "lucide-react";
 
-interface FormData {
+interface OrderFormData {
   name: string;
   phone: string;
   email: string;
   address: string;
+  product: string;
   quantity: string;
 }
 
-const SampleRequestForm = () => {
-  const [formData, setFormData] = useState<FormData>({
+const products = [
+  "Whole Milk (6% Fat)",
+  "Toned Milk (3% Fat)",
+  "Double Toned Milk (1.5% Fat)",
+  "Natural Curd",
+];
+
+const OrderForm = () => {
+  const [formData, setFormData] = useState<OrderFormData>({
     name: "",
     phone: "",
     email: "",
     address: "",
-    quantity: "1",
+    product: "",
+    quantity: "",
   });
 
   const handleSubmit = (e: FormEvent) => {
@@ -23,13 +32,15 @@ const SampleRequestForm = () => {
 
     // Format message for WhatsApp
     const message = `
-*New Sample Request*
+*New Order Request*
 
 *Name:* ${formData.name}
 *Phone:* ${formData.phone}
 *Email:* ${formData.email}
 *Address:* ${formData.address}
-*Quantity:* ${formData.quantity} sample(s)
+
+*Product:* ${formData.product}
+*Quantity:* ${formData.quantity}
 
 ---
 Sent from Vizhis Dairy Farm Website
@@ -37,7 +48,7 @@ Sent from Vizhis Dairy Farm Website
 
     // Replace with your WhatsApp number (include country code without + or spaces)
     // Example: For +91 98765 43210, use: 919876543210
-    const whatsappNumber = "8526305847"; // REPLACE WITH YOUR ACTUAL NUMBER
+    const whatsappNumber = "918680050504"; // REPLACE WITH YOUR ACTUAL NUMBER
     
     // Encode message for URL
     const encodedMessage = encodeURIComponent(message);
@@ -54,7 +65,8 @@ Sent from Vizhis Dairy Farm Website
       phone: "",
       email: "",
       address: "",
-      quantity: "1",
+      product: "",
+      quantity: "",
     });
   };
 
@@ -150,44 +162,65 @@ Sent from Vizhis Dairy Farm Website
         />
       </div>
 
+      {/* Product Selection */}
+      <div>
+        <label
+          htmlFor="product"
+          className="block text-sm font-medium text-foreground mb-2"
+        >
+          Select Product *
+        </label>
+        <select
+          id="product"
+          name="product"
+          value={formData.product}
+          onChange={handleChange}
+          required
+          className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+        >
+          <option value="">Choose a product</option>
+          {products.map((product) => (
+            <option key={product} value={product}>
+              {product}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {/* Quantity */}
       <div>
         <label
           htmlFor="quantity"
           className="block text-sm font-medium text-foreground mb-2"
         >
-          Sample Quantity *
+          Quantity *
         </label>
-        <select
+        <input
+          type="text"
           id="quantity"
           name="quantity"
           value={formData.quantity}
           onChange={handleChange}
           required
           className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-        >
-          <option value="1">1 Sample Pack</option>
-          <option value="2">2 Sample Packs</option>
-          <option value="3">3 Sample Packs</option>
-          <option value="4">4 Sample Packs</option>
-          <option value="5">5 Sample Packs</option>
-        </select>
+          placeholder="e.g., 2 Litres, 500g, etc."
+        />
       </div>
 
       {/* Submit Button */}
       <button
         type="submit"
-        className="w-full bg-emerald-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-emerald-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+        className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
       >
         <Send className="w-5 h-5" />
-        Send Request via WhatsApp
+        Send Order via WhatsApp
       </button>
 
       <p className="text-xs text-muted-foreground text-center">
-        You'll be redirected to WhatsApp to send your sample request
+        You'll be redirected to WhatsApp to send your order details
       </p>
     </form>
   );
 };
 
-export default SampleRequestForm;
+export default OrderForm;
