@@ -6,10 +6,10 @@ import type { NavItem } from "@/types"; // adjust path if needed
 
 const navItems: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
   { label: "Products", href: "/products" },
   { label: "DairyScan", href: "/dairyscan" },
   { label: "Gallery", href: "/gallery" },
+  { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
