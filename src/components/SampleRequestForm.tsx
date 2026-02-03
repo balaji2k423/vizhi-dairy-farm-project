@@ -41,7 +41,7 @@ const OrderForm = () => {
     try {
       // STEP 1: Send to Google Sheets
       // Replace this URL with your deployed Google Apps Script web app URL
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFhM9MWPF9y9QM2eLKK0cT1NsGt7ChEAGmFzE1duk6JbAKx-utzgh9mOzKv8rxuvQ1iA/exec';
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwY6fQ5hJ6NL9kaJHwr12mWzeW1wbcibKzWGiMka6DciNLikjq1OjjVSMePxecN3J3IwA/exec';
       
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
