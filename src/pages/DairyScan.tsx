@@ -335,27 +335,7 @@ const DairyScan = () => {
                     </div>
                   </div>
 
-                  {/* Upload Form Link */}
-                  <div className="mt-6 bg-emerald-50 border border-emerald-200 rounded-xl p-4">
-                    <div className="flex items-start gap-3">
-                      <FileText className="w-5 h-5 text-emerald-600 mt-0.5" />
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900 mb-1">Daily Report Upload</h4>
-                        <p className="text-sm text-gray-600 mb-3">
-                          Lab staff can upload daily reports using our secure form. Reports appear here automatically.
-                        </p>
-                        <a 
-                          href="https://docs.google.com/forms/d/e/1FAIpQLSdwkBcmRq2UwFqCyUPBMFvrtRSFBWqBVeh_dyAYh7OrGres4Q/viewform"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          Upload Today's Report
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  
                 </>
               ) : (
                 <div className="bg-white rounded-2xl p-16 text-center shadow-lg border border-gray-200">
