@@ -1,3 +1,4 @@
+// src/components/OrderForm.tsx
 import { useState, FormEvent } from "react";
 import { Send, Loader2 } from "lucide-react";
 
@@ -7,15 +8,21 @@ interface OrderFormData {
   email: string;
   address: string;
   product: string;
+  pack: string;
   quantity: string;
 }
 
-const products = [
-  "Whole Milk (6% Fat)",
-  "Toned Milk (3% Fat)",
-  "Double Toned Milk (1.5% Fat)",
-  "Natural Curd",
+const milkProducts = [
+  { value: "Double Toned Milk - 1.5% Fat", label: "Double Toned Milk - 1.5% Fat" },
+  { value: "Toned Milk - 3% Fat", label: "Toned Milk - 3% Fat" },
+  { value: "Standardized Milk - 3.5% Fat", label: "Standardized Milk - 3.5% Fat" },
+  { value: "Full Cream Milk - 4% Fat", label: "Full Cream Milk - 4% Fat" },
+  { value: "Gold Milk - 4.5% Fat", label: "Gold Milk - 4.5% Fat" },
 ];
+
+const packOptions = ["300ml", "500ml"];
+
+const quantityOptions = Array.from({ length: 10 }, (_, i) => (i + 1).toString());
 
 const OrderForm = () => {
   const [formData, setFormData] = useState<OrderFormData>({
@@ -24,9 +31,10 @@ const OrderForm = () => {
     email: "",
     address: "",
     product: "",
+    pack: "",
     quantity: "",
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'success' | 'error' | null;
@@ -39,23 +47,15 @@ const OrderForm = () => {
     setSubmitStatus({ type: null, message: '' });
 
     try {
-      // STEP 1: Send to Google Sheets
-      // Replace this URL with your deployed Google Apps Script web app URL
       const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwY6fQ5hJ6NL9kaJHwr12mWzeW1wbcibKzWGiMka6DciNLikjq1OjjVSMePxecN3J3IwA/exec';
-      
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Important for Google Apps Script
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      // Note: With no-cors mode, we can't read the response, but the data is sent
-      // If you need to verify the response, you'll need to set up CORS in your Apps Script
-      
-      // STEP 2: Format message for WhatsApp
       const message = `
 *New Order Request*
 
@@ -65,31 +65,24 @@ const OrderForm = () => {
 *Address:* ${formData.address}
 
 *Product:* ${formData.product}
+*Pack:* ${formData.pack}
 *Quantity:* ${formData.quantity}
 
 ---
 Sent from Vizhis Dairy Farm Website
       `.trim();
 
-      // WhatsApp number (include country code without + or spaces)
       const whatsappNumber = "918680050504";
-      
-      // Encode message for URL
       const encodedMessage = encodeURIComponent(message);
-      
-      // Create WhatsApp URL
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-      
-      // Open WhatsApp in new tab
+
       window.open(whatsappUrl, "_blank");
 
-      // Show success message
       setSubmitStatus({
         type: 'success',
         message: 'Order saved! Opening WhatsApp to confirm your order...'
       });
 
-      // Reset form after a short delay
       setTimeout(() => {
         setFormData({
           name: "",
@@ -97,11 +90,11 @@ Sent from Vizhis Dairy Farm Website
           email: "",
           address: "",
           product: "",
+          pack: "",
           quantity: "",
         });
         setSubmitStatus({ type: null, message: '' });
       }, 3000);
-
     } catch (error) {
       console.error('Error submitting order:', error);
       setSubmitStatus({
@@ -124,13 +117,10 @@ Sent from Vizhis Dairy Farm Website
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-5 bg-emerald-50/60 backdrop-blur-sm rounded-2xl p-8 border border-emerald-200/50 shadow-soft">
         {/* Name */}
         <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-foreground mb-2"
-          >
+          <label htmlFor="name" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Full Name *
           </label>
           <input
@@ -141,17 +131,14 @@ Sent from Vizhis Dairy Farm Website
             onChange={handleChange}
             required
             disabled={isSubmitting}
-            className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2.5 rounded-lg border border-emerald-200/50 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all disabled:opacity-60"
             placeholder="Enter your full name"
           />
         </div>
 
         {/* Phone */}
         <div>
-          <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-foreground mb-2"
-          >
+          <label htmlFor="phone" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Phone Number *
           </label>
           <input
@@ -163,17 +150,14 @@ Sent from Vizhis Dairy Farm Website
             required
             pattern="[0-9]{10}"
             disabled={isSubmitting}
-            className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2.5 rounded-lg border border-emerald-200/50 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all disabled:opacity-60"
             placeholder="10-digit mobile number"
           />
         </div>
 
         {/* Email */}
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-foreground mb-2"
-          >
+          <label htmlFor="email" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Email Address *
           </label>
           <input
@@ -184,17 +168,14 @@ Sent from Vizhis Dairy Farm Website
             onChange={handleChange}
             required
             disabled={isSubmitting}
-            className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2.5 rounded-lg border border-emerald-200/50 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all disabled:opacity-60"
             placeholder="your.email@example.com"
           />
         </div>
 
         {/* Address */}
         <div>
-          <label
-            htmlFor="address"
-            className="block text-sm font-medium text-foreground mb-2"
-          >
+          <label htmlFor="address" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Delivery Address *
           </label>
           <textarea
@@ -205,18 +186,15 @@ Sent from Vizhis Dairy Farm Website
             required
             rows={3}
             disabled={isSubmitting}
-            className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2.5 rounded-lg border border-emerald-200/50 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all resize-none disabled:opacity-60"
             placeholder="Enter your complete delivery address"
           />
         </div>
 
-        {/* Product Selection */}
+        {/* Product */}
         <div>
-          <label
-            htmlFor="product"
-            className="block text-sm font-medium text-foreground mb-2"
-          >
-            Select Product *
+          <label htmlFor="product" className="block text-sm font-medium text-emerald-900 mb-1.5">
+            Select Milk *
           </label>
           <select
             id="product"
@@ -225,48 +203,73 @@ Sent from Vizhis Dairy Farm Website
             onChange={handleChange}
             required
             disabled={isSubmitting}
-            className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2.5 rounded-lg border border-emerald-200/50 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all disabled:opacity-60"
           >
-            <option value="">Choose a product</option>
-            {products.map((product) => (
-              <option key={product} value={product}>
-                {product}
+            <option value="">Choose milk variant</option>
+            {milkProducts.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
               </option>
             ))}
           </select>
         </div>
 
-        {/* Quantity */}
+        {/* Pack */}
         <div>
-          <label
-            htmlFor="quantity"
-            className="block text-sm font-medium text-foreground mb-2"
-          >
-            Quantity *
+          <label htmlFor="pack" className="block text-sm font-medium text-emerald-900 mb-1.5">
+            Pack Size *
           </label>
-          <input
-            type="text"
+          <select
+            id="pack"
+            name="pack"
+            value={formData.pack}
+            onChange={handleChange}
+            required
+            disabled={isSubmitting}
+            className="w-full px-4 py-2.5 rounded-lg border border-emerald-200/50 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all disabled:opacity-60"
+          >
+            <option value="">Select pack</option>
+            {packOptions.map((pack) => (
+              <option key={pack} value={pack}>
+                {pack}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Quantity - Now Dropdown 1 to 10 */}
+        <div>
+          <label htmlFor="quantity" className="block text-sm font-medium text-emerald-900 mb-1.5">
+            Quantity (packs) *
+          </label>
+          <select
             id="quantity"
             name="quantity"
             value={formData.quantity}
             onChange={handleChange}
             required
             disabled={isSubmitting}
-            className="w-full px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            placeholder="e.g., 2 Litres, 500g, etc."
-          />
+            className="w-full px-4 py-2.5 rounded-lg border border-emerald-200/50 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all disabled:opacity-60"
+          >
+            <option value="">Select quantity</option>
+            {quantityOptions.map((qty) => (
+              <option key={qty} value={qty}>
+                {qty}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Status Message */}
         {submitStatus.type && (
           <div
-            className={`p-4 rounded-lg ${
+            className={`p-4 rounded-lg text-sm font-medium ${
               submitStatus.type === 'success'
                 ? 'bg-green-50 text-green-800 border border-green-200'
                 : 'bg-red-50 text-red-800 border border-red-200'
             }`}
           >
-            <p className="text-sm font-medium">{submitStatus.message}</p>
+            {submitStatus.message}
           </div>
         )}
 
@@ -274,12 +277,12 @@ Sent from Vizhis Dairy Farm Website
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md disabled:hover:bg-primary"
+          className="w-full bg-emerald-700 text-white py-3 px-6 rounded-lg font-medium hover:bg-emerald-800 transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Submitting Order...
+              Submitting...
             </>
           ) : (
             <>
@@ -289,7 +292,7 @@ Sent from Vizhis Dairy Farm Website
           )}
         </button>
 
-        <p className="text-xs text-muted-foreground text-center">
+        <p className="text-xs text-emerald-700/70 text-center">
           Your order will be saved and you'll be redirected to WhatsApp to confirm
         </p>
       </form>
