@@ -57,7 +57,7 @@ const OrderForm = () => {
       });
 
       const message = `
-*New Order Request*
+*New Sample Request*
 
 *Name:* ${formData.name}
 *Phone:* ${formData.phone}
