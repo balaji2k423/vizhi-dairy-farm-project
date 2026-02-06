@@ -41,12 +41,12 @@ const automationFeatures = [
   },
   {
     icon: Zap,
-    title: "Automated Pasteurization",
-    description: "Computer-controlled temperature and timing ensure perfect pasteurization without any manual intervention.",
+    title: "Precision Temperature Control",
+    description: "Advanced systems maintain ideal conditions throughout processing for consistent quality and safety.",
   },
   {
     icon: CheckCircle,
-    title: "Quality Testing",
+    title: "Continuous Quality Testing",
     description: "Advanced sensors continuously monitor quality parameters, rejecting any batch that doesn't meet standards.",
   },
   {
@@ -80,8 +80,8 @@ const processSteps = [
   },
   {
     number: "02",
-    title: "Instant Processing",
-    description: "Within minutes, milk enters our sealed processing facility where it's immediately cooled and prepared.",
+    title: "Immediate Hygienic Processing",
+    description: "Within minutes, milk enters our sealed facility where it undergoes careful, controlled treatment.",
   },
   {
     number: "03",
@@ -99,7 +99,7 @@ const About = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-soft">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-emerald-100/80 via-emerald-50/70 to-green-100/60">
         <div className="container-custom">
           <div className="text-center max-w-4xl mx-auto">
             <span className="inline-block text-sm font-medium text-accent uppercase tracking-wider mb-4">
@@ -144,7 +144,7 @@ const About = () => {
                 ZERO HUMAN TOUCH
               </h3>
               <p className="text-primary-foreground/90">
-                No human hands ever contact your dairy products
+                Complete elimination of human contact in production
               </p>
             </div>
 
@@ -156,7 +156,7 @@ const About = () => {
                 MAXIMUM HYGIENE
               </h3>
               <p className="text-primary-foreground/90">
-                Hospital-grade cleanliness standards maintained 24/7
+                Hospital-grade standards through automation
               </p>
             </div>
           </div>
@@ -164,105 +164,76 @@ const About = () => {
       </section>
 
       {/* Story Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Images */}
-            <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-card">
-                    <img
-                      src={aboutImage1}
-                      alt="Automated dairy processing"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-4 pt-8">
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-card">
-                    <img
-                      src={aboutImage2}
-                      alt="Modern dairy facility"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-card">
-                    <img
-                      src={aboutImage3}
-                      alt="Quality dairy products"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Images Column */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="rounded-2xl overflow-hidden shadow-elevated">
+                <img
+                  src={aboutImage1}
+                  alt="Automated dairy facility"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-elevated">
+                <img
+                  src={aboutImage2}
+                  alt="Modern dairy processing"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="col-span-2 rounded-2xl overflow-hidden shadow-elevated">
+                <img
+                  src={aboutImage3}
+                  alt="Pure milk bottle"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
-            {/* Content */}
+            {/* Text Column */}
             <div>
               <SectionHeading
-                badge="Revolutionary Technology"
-                title="Machines, Not Hands"
+                badge="Our Philosophy"
+                title="Redefining Dairy Purity"
                 align="left"
               />
-              <div className="space-y-6 text-muted-foreground">
-                <p className="body-md">
-                  Vizhis Dairy Farm represents a complete revolution in dairy production. 
-                  We've eliminated all human contact from our processing chain through 
-                  <strong className="text-foreground"> advanced automated systems</strong>.
-                </p>
-                <p className="body-md">
-                  From the moment milk leaves the cow to when it arrives at your doorstep, 
-                  <strong className="text-foreground"> not a single human hand touches your product</strong>. 
-                  Our facility operates like a high-tech laboratory, with machines handling every step 
-                  under constant monitoring.
-                </p>
-                <p className="body-md">
-                  This isn't just automation - it's a <strong className="text-foreground">complete reimagining 
-                  of dairy safety</strong>. While our cows live naturally in open pastures, our processing 
-                  facility maintains hospital-grade hygiene through continuous automated sanitization.
-                </p>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-border">
-                <div>
-                  <p className="font-serif text-3xl font-bold text-primary">0</p>
-                  <p className="text-muted-foreground text-sm mt-1">Human Touch</p>
-                </div>
-                <div>
-                  <p className="font-serif text-3xl font-bold text-primary">100%</p>
-                  <p className="text-muted-foreground text-sm mt-1">Automated</p>
-                </div>
-                <div>
-                  <p className="font-serif text-3xl font-bold text-primary">24/7</p>
-                  <p className="text-muted-foreground text-sm mt-1">Monitoring</p>
-                </div>
-              </div>
+              <p className="body-lg text-muted-foreground mb-6">
+                At Vizhis Dairy Farm, we believe the cleanest milk comes from the cleanest process. 
+                That's why we've invested in full automation — not just for efficiency, but for 
+                uncompromising hygiene and consistency that hand-processing simply cannot achieve.
+              </p>
+              <p className="body-lg text-muted-foreground">
+                Every bottle that leaves our facility carries the same guarantee: zero human touch, 
+                zero compromise on quality, and maximum safety for your family.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Process Steps Section - NEW */}
-      <section className="section-padding bg-gradient-soft">
+      {/* Process Steps */}
+      <section className="section-padding bg-gradient-hero">
         <div className="container-custom">
           <SectionHeading
-            badge="Our Process"
-            title="From Farm to Your Table"
-            subtitle="See how we maintain the highest standards of hygiene at every step of production."
+            badge="How It Works"
+            title="Our Automated Journey"
+            subtitle="From pasture to package – every step is touchless and precisely controlled"
+            className="text-primary-foreground"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {processSteps.map((step) => (
-              <div key={step.number} className="text-center">
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-                    <span className="text-3xl font-bold text-primary">{step.number}</span>
-                  </div>
-                </div>
-                <h3 className="font-serif font-semibold text-xl mb-3">{step.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+              <div
+                key={step.number}
+                className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20"
+              >
+                <div className="text-6xl font-bold text-white/30 mb-4">{step.number}</div>
+                <h3 className="font-serif font-semibold text-xl text-white mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-white/90 text-sm">
                   {step.description}
                 </p>
               </div>
@@ -271,29 +242,28 @@ const About = () => {
         </div>
       </section>
 
-      {/* Automation Features - Detailed */}
-      <section className="section-padding bg-sage-light">
+      {/* Automation Features */}
+      <section className="section-padding bg-white">
         <div className="container-custom">
           <SectionHeading
-            badge="Fully Automated Process"
-            title="How We Ensure Zero Human Contact"
-            subtitle="Six stages of completely automated, touchless dairy processing that guarantee maximum hygiene."
+            badge="Technology"
+            title="Automation That Matters"
+            subtitle="Advanced systems working together to deliver unmatched hygiene and consistency"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {automationFeatures.map((feature, index) => (
+            {automationFeatures.map((feature) => (
               <div
                 key={feature.title}
-                className="bg-card rounded-2xl p-8 shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2"
+                className="bg-white rounded-2xl p-8 shadow-soft border border-gray-100 hover:shadow-card transition-all duration-300"
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <feature.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <span className="text-3xl font-bold text-primary/20">0{index + 1}</span>
+                <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mb-6">
+                  <feature.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="font-serif font-semibold text-xl mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <h3 className="font-serif font-semibold text-xl mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground text-sm">
                   {feature.description}
                 </p>
               </div>
@@ -303,204 +273,54 @@ const About = () => {
       </section>
 
       {/* Hygiene Standards */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Content */}
-            <div>
-              <SectionHeading
-                badge="Hygiene Standards"
-                title="Beyond Human Capability"
-                align="left"
-              />
-              <p className="body-md text-muted-foreground mb-8">
-                Our automated systems maintain hygiene standards that are impossible for 
-                traditional manual processing to achieve. Every surface, every pipeline, 
-                every contact point is continuously monitored and sanitized by machines.
-              </p>
-              
-              <div className="grid grid-cols-1 gap-4">
-                {hygieneStandards.map((standard) => (
-                  <div 
-                    key={standard}
-                    className="flex items-center gap-4 bg-sage-light rounded-xl p-4"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                      <CheckCircle className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <span className="font-medium text-foreground">{standard}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Visual Stats */}
-            <div className="grid grid-cols-2 gap-6">
-              <div className="bg-card rounded-2xl p-8 text-center shadow-soft">
-                <Bot className="w-12 h-12 text-primary mx-auto mb-4" />
-                <p className="text-4xl font-bold text-primary mb-2">12+</p>
-                <p className="text-sm text-muted-foreground">Automated Systems</p>
-              </div>
-
-              <div className="bg-card rounded-2xl p-8 text-center shadow-soft">
-                <Sparkles className="w-12 h-12 text-primary mx-auto mb-4" />
-                <p className="text-4xl font-bold text-primary mb-2">200+</p>
-                <p className="text-sm text-muted-foreground">Daily Sanitization Cycles</p>
-              </div>
-
-              <div className="bg-card rounded-2xl p-8 text-center shadow-soft">
-                <Zap className="w-12 h-12 text-primary mx-auto mb-4" />
-                <p className="text-4xl font-bold text-primary mb-2">99.99%</p>
-                <p className="text-sm text-muted-foreground">Purity Rate</p>
-              </div>
-
-              <div className="bg-card rounded-2xl p-8 text-center shadow-soft">
-                <Lock className="w-12 h-12 text-primary mx-auto mb-4" />
-                <p className="text-4xl font-bold text-primary mb-2">100%</p>
-                <p className="text-sm text-muted-foreground">Sealed Environment</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="section-padding bg-sage-light">
-        <div className="container-custom">
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom max-w-4xl mx-auto">
           <SectionHeading
-            badge="Our Core Principles"
-            title="What Drives Us"
-            subtitle="These values are embedded in every automated process and every decision we make."
+            badge="Standards"
+            title="Our Hygiene Commitment"
+            subtitle="Non-negotiable rules that define every aspect of our production"
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {hygieneStandards.map((standard, index) => (
               <div
-                key={value.title}
-                className="bg-card rounded-2xl p-8 text-center shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2"
+                key={index}
+                className="flex items-start gap-4 bg-white p-6 rounded-xl shadow-soft"
               >
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <value.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="font-serif font-semibold text-lg mb-3">{value.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {value.description}
-                </p>
+                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                <p className="text-muted-foreground">{standard}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="section-padding">
+      {/* Core Values */}
+      <section className="section-padding bg-white">
         <div className="container-custom">
           <SectionHeading
-            badge="The Vizhis Advantage"
-            title="Why Automation Matters for Your Health"
-            subtitle="Understanding how our touchless technology protects you and your family."
+            badge="Our Values"
+            title="What Drives Us"
+            subtitle="The principles behind every decision we make"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-card rounded-2xl p-8 shadow-soft">
-              <div className="flex items-center gap-3 mb-4">
-                <Shield className="w-8 h-8 text-primary" />
-                <h3 className="font-serif font-semibold text-xl">Complete Contamination Prevention</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value) => (
+              <div
+                key={value.title}
+                className="bg-white rounded-2xl p-8 shadow-soft border border-gray-100 text-center hover:shadow-card transition-all duration-300"
+              >
+                <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
+                  <value.icon className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="font-serif font-semibold text-xl mb-3">
+                  {value.title}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {value.description}
+                </p>
               </div>
-              <p className="text-muted-foreground mb-4">
-                Human hands, even when gloved, can carry bacteria and contaminants. Our automated 
-                systems are sterilized after every cycle, ensuring zero contamination risk.
-              </p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  No bacterial transmission from workers
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  No cross-contamination between batches
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  No airborne particle exposure
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-card rounded-2xl p-8 shadow-soft">
-              <div className="flex items-center gap-3 mb-4">
-                <Zap className="w-8 h-8 text-primary" />
-                <h3 className="font-serif font-semibold text-xl">Consistent Quality Every Time</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Machines don't have bad days. Our automated systems maintain exact temperatures, 
-                timings, and handling procedures with perfect consistency.
-              </p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  Precise temperature control to 0.1°C
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  Exact timing for every process
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  Uniform quality in every bottle
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-card rounded-2xl p-8 shadow-soft">
-              <div className="flex items-center gap-3 mb-4">
-                <Lock className="w-8 h-8 text-primary" />
-                <h3 className="font-serif font-semibold text-xl">Sealed From Nature to Bottle</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Our milk travels through completely sealed pipelines from milking to bottling. 
-                It never comes in contact with air, surfaces, or any external environment.
-              </p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  Closed-loop transfer system
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  No environmental exposure
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  Sterile packaging environment
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-card rounded-2xl p-8 shadow-soft">
-              <div className="flex items-center gap-3 mb-4">
-                <Sparkles className="w-8 h-8 text-primary" />
-                <h3 className="font-serif font-semibold text-xl">Real-Time Quality Monitoring</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Advanced sensors continuously test every parameter. Any deviation, no matter 
-                how small, triggers immediate rejection of that batch.
-              </p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  Continuous bacterial count monitoring
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  Instant contamination detection
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  Automated quality certification
-                </li>
-              </ul>
-            </div>
+            ))}
           </div>
         </div>
       </section>

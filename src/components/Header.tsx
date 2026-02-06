@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Gift } from "lucide-react";
-import type { NavItem } from "@/types"; // adjust path if needed
+import type { NavItem } from "@/types";
 
 const navItems: NavItem[] = [
   { label: "Home", href: "/" },
@@ -44,6 +44,12 @@ const Header = () => {
     return "bg-transparent";
   };
 
+  // Handle navigation click - scroll to top
+  const handleNavClick = () => {
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <header
@@ -54,7 +60,7 @@ const Header = () => {
         <div className="container mx-auto px-5 sm:px-6 lg:px-8">
           <nav className="flex items-center justify-between">
             {/* Logo with Smooth Cross-Fade Transition */}
-            <Link to="/" className="flex items-center gap-3 group relative z-20">
+            <Link to="/" className="flex items-center gap-3 group relative z-20" onClick={handleNavClick}>
               {/* New Logo (homepage before scroll) */}
               <img 
                 src="/logo1.png" 
@@ -86,6 +92,7 @@ const Header = () => {
                 <li key={item.href}>
                   <Link
                     to={item.href}
+                    onClick={handleNavClick}
                     className={`relative font-medium tracking-wide transition-all duration-300 text-sm lg:text-base ${
                       location.pathname === item.href
                         ? "text-[#4a7e5e] font-semibold after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-emerald-600 after:to-sage-dark after:rounded-full"
@@ -109,6 +116,7 @@ const Header = () => {
               </a>
               <Link
                 to="/contact?sample=true"
+                onClick={handleNavClick}
                 className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-medium text-sm tracking-wide shadow-md hover:from-emerald-700 hover:to-sage-dark hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
               >
                 <Gift className="w-4 h-4" />
@@ -159,6 +167,7 @@ const Header = () => {
                   >
                     <Link
                       to={item.href}
+                      onClick={handleNavClick}
                       className={`block py-4 px-6 font-semibold transition-all duration-300 text-lg relative group ${
                         isHomePage && isMenuOpen
                           ? location.pathname === item.href
@@ -168,7 +177,6 @@ const Header = () => {
                           ? "text-emerald-800 font-bold"
                           : "text-gray-800 hover:text-emerald-700"
                       }`}
-                      onClick={() => setIsMenuOpen(false)}
                     >
                       {/* Animated underline on hover/active */}
                       <span className={`absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r transition-all duration-300 ${
@@ -243,6 +251,7 @@ const Header = () => {
             </a>
             <Link
               to="/contact?sample=true"
+              onClick={handleNavClick}
               className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full font-semibold text-sm transition-all bg-gradient-to-r from-emerald-600 to-emerald-700 text-white hover:from-emerald-700 hover:to-sage-dark shadow-lg hover:shadow-xl active:scale-95"
             >
               <Gift className="w-4 h-4" />

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Droplets, Truck, Award, Users, ArrowRight, Bot, Sparkles } from "lucide-react";
+import { Droplets, Truck, Award, Users, ArrowRight, Bot, Sparkles, Eye } from "lucide-react";
 import Hero from "@/components/Hero";
 import SectionHeading from "@/components/SectionHeading";
 import ProductCard from "@/components/ProductCard";
@@ -11,22 +11,22 @@ import galleryCare from "@/assets/img6.jpeg";
 
 const featuredProducts: Product[] = [
   {
-    id: "1",
+    id: "milk-1",
     name: "Farm Fresh Milk",
     description: "Pure, unprocessed whole milk delivered fresh from our happy, grass-fed cows.",
-    price: "₹60/Litre",
+    price: "Starting from ₹44/Litre",
     image: productMilk,
     category: "Milk",
     badge: "Available Now",
   },
   {
-    id: "2",
+    id: "curd",
     name: "Natural Curd",
     description: "Creamy, probiotic-rich curd made using traditional fermentation methods.",
     price: "₹80/500g",
     image: productCurd,
     category: "Curd",
-    badge: "Available Now",
+    badge: "Coming Soon",
   },
 ];
 
@@ -59,8 +59,8 @@ const Home = () => {
       {/* Hero Section */}
       <Hero />
 
-      {/* Features Section */}
-      <section className="section-padding bg-gradient-soft">
+      {/* Features Section - Changed to green tones */}
+      <section className="section-padding bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
         <div className="container-custom">
           <SectionHeading
             badge="Why Choose Us"
@@ -72,14 +72,14 @@ const Home = () => {
             {features.map((feature, index) => (
               <div
                 key={feature.title}
-                className="bg-card rounded-2xl p-8 text-center shadow-soft hover:shadow-card transition-shadow duration-500"
+                className="bg-emerald-50/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-soft hover:shadow-card transition-shadow duration-500 border border-emerald-200/50"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <feature.icon className="w-7 h-7 text-primary" />
+                <div className="w-16 h-16 rounded-full bg-emerald-200/70 flex items-center justify-center mx-auto mb-6">
+                  <feature.icon className="w-7 h-7 text-emerald-700" />
                 </div>
-                <h3 className="font-serif font-semibold text-lg mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <h3 className="font-serif font-semibold text-lg mb-3 text-emerald-900">{feature.title}</h3>
+                <p className="text-emerald-800/70 text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -89,7 +89,7 @@ const Home = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="section-padding">
+      <section className="section-padding bg-emerald-50/30">
         <div className="container-custom">
           <SectionHeading
             badge="Our Products"
@@ -106,17 +106,17 @@ const Home = () => {
           <div className="text-center mt-12">
             <Link
               to="/products"
-              className="inline-flex items-center gap-2 text-primary font-medium hover:text-sage-dark transition-colors group"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-700 text-white rounded-full font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
             >
               View All Products
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* About Preview */}
-      <section className="section-padding bg-sage-light">
+      {/* About Preview - Changed to green tones */}
+      <section className="section-padding bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
@@ -128,9 +128,9 @@ const Home = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-card rounded-2xl p-6 shadow-card hidden md:block">
-                <p className="font-serif text-3xl font-bold text-primary">2025</p>
-                <p className="text-muted-foreground text-sm">Established</p>
+              <div className="absolute -bottom-6 -right-6 bg-emerald-50 rounded-2xl p-6 shadow-card hidden md:block border border-emerald-200/50">
+                <p className="font-serif text-3xl font-bold text-emerald-800">2025</p>
+                <p className="text-emerald-700/70 text-sm">Established</p>
               </div>
             </div>
 
@@ -141,17 +141,17 @@ const Home = () => {
                 title="A New Era of Dairy Hygiene"
                 align="left"
               />
-              <p className="body-md text-muted-foreground mb-6">
+              <p className="body-md text-emerald-800/80 mb-6">
                 Vizhis Dairy Farm represents the future of dairy production. As an emerging 
                 dairy farm established in 2025, we've embraced cutting-edge automation technology 
                 to ensure the highest standards of hygiene and safety.
               </p>
-              <p className="body-md text-muted-foreground mb-8">
+              <p className="body-md text-emerald-800/80 mb-8">
                 Our commitment to zero human contact processing, combined with ethical 
                 farming practices, makes us the new standard in premium dairy products. 
                 We're building trust one bottle at a time.
               </p>
-              <Link to="/about" className="btn-hero inline-flex items-center gap-2">
+              <Link to="/about" className="btn-hero inline-flex items-center gap-2 bg-emerald-700 text-white hover:bg-emerald-800">
                 Learn More
                 <ArrowRight size={18} />
               </Link>

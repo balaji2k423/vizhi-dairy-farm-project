@@ -1,59 +1,78 @@
+import { Link } from "react-router-dom";
 import type { Product } from "@/types";
+import { Eye, Clock } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const isComingSoon = product.badge === "Coming Soon";
+  
+  // Navigation logic: If coming soon (including curd), go to coming-soon section
+  // Otherwise go to milk-range section
+  const getProductLink = () => {
+    if (isComingSoon) {
+      return "/products#coming-soon";
+    }
+    return "/products#milk-range";
+  };
+
   return (
-    <article className="product-card group">
-      {/* Image Container – taller aspect for bottles */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-cream rounded-t-xl"> {/* ← changed to aspect-[3/4] or try aspect-[4/5] */}
+    <article className="bg-emerald-50/40 rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2 group relative border border-emerald-200/50">
+      {/* Badge */}
+      <div className={`absolute top-4 right-4 z-10 px-4 py-2 rounded-full text-xs font-semibold flex items-center gap-2 ${
+        isComingSoon 
+          ? "bg-amber-500 text-white"
+          : "bg-emerald-700 text-white"
+      }`}>
+        {isComingSoon && <Clock className="w-3 h-3" />}
+        {product.badge}
+      </div>
+
+      {/* Image Container */}
+      <div className={`relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-emerald-100/60 to-emerald-50/40 flex items-center justify-center p-8 ${
+        isComingSoon ? "opacity-60" : ""
+      }`}>
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-contain p-6 transition-transform duration-700 group-hover:scale-105" // ← object-contain + padding
+          className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-105"
         />
-        {product.badge && (
-          <span className="absolute top-4 left-4 bg-accent text-accent-foreground text-xs font-medium px-3 py-1 rounded-full">
-            {product.badge}
-          </span>
-        )}
         {/* Overlay on hover */}
-        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500" />
+        {!isComingSoon && (
+          <div className="absolute inset-0 bg-emerald-700/0 group-hover:bg-emerald-700/5 transition-colors duration-500" />
+        )}
       </div>
 
       {/* Content */}
       <div className="p-6">
-        <span className="text-xs text-muted-foreground uppercase tracking-wider">
+        <span className="text-sm font-medium text-emerald-700 uppercase tracking-wider">
           {product.category}
         </span>
-        <h3 className="font-serif font-semibold text-xl mt-2 mb-3 text-foreground group-hover:text-primary transition-colors">
+        <h3 className="font-serif font-semibold text-2xl mt-2 mb-3 text-emerald-900 group-hover:text-emerald-700 transition-colors">
           {product.name}
         </h3>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+        <p className="text-emerald-800/70 text-sm leading-relaxed mb-6 line-clamp-2">
           {product.description}
         </p>
-        <div className="flex items-center justify-between">
-          <span className="font-serif text-lg font-semibold text-primary">
+        
+        <div className="flex items-center justify-between pt-4 border-t border-emerald-200/50">
+          <span className="text-xl font-semibold text-emerald-900">
             {product.price}
           </span>
-          <button className="text-sm font-medium text-primary hover:text-sage-dark transition-colors flex items-center gap-2">
+          
+          <Link
+            to={getProductLink()}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              isComingSoon
+                ? "bg-emerald-200/50 text-emerald-900 hover:bg-emerald-300/50"
+                : "bg-emerald-700 text-white hover:bg-emerald-800"
+            }`}
+          >
+            <Eye className="w-4 h-4" />
             View Details
-            <svg
-              className="w-4 h-4 transition-transform group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </article>
