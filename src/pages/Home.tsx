@@ -1,3 +1,4 @@
+// src/pages/Home.tsx
 import { Link } from "react-router-dom";
 import { Droplets, Truck, Award, Users, ArrowRight, Bot, Sparkles, Eye } from "lucide-react";
 import Hero from "@/components/Hero";
@@ -23,7 +24,7 @@ const featuredProducts: Product[] = [
     id: "curd",
     name: "Natural Curd",
     description: "Creamy, probiotic-rich curd made using traditional fermentation methods.",
-    price: "₹80/500g",
+    price: "",
     image: productCurd,
     category: "Curd",
     badge: "Coming Soon",
@@ -56,11 +57,11 @@ const features = [
 const Home = () => {
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero */}
       <Hero />
 
-      {/* Features Section - Changed to green tones */}
-      <section className="section-padding bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
+      {/* Features - tighter */}
+      <section className="py-12 bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
         <div className="container-custom">
           <SectionHeading
             badge="Why Choose Us"
@@ -68,18 +69,18 @@ const Home = () => {
             subtitle="We're revolutionizing dairy hygiene with complete automation and zero human contact."
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
               <div
                 key={feature.title}
-                className="bg-emerald-50/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-soft hover:shadow-card transition-shadow duration-500 border border-emerald-200/50"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="bg-emerald-50/60 backdrop-blur-sm rounded-2xl p-6 text-center shadow-soft hover:shadow-card transition-all duration-300 border border-emerald-200/50"
+                style={{ animationDelay: `${index * 80}ms` }}
               >
-                <div className="w-16 h-16 rounded-full bg-emerald-200/70 flex items-center justify-center mx-auto mb-6">
+                <div className="w-14 h-14 rounded-full bg-emerald-200/70 flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-7 h-7 text-emerald-700" />
                 </div>
-                <h3 className="font-serif font-semibold text-lg mb-3 text-emerald-900">{feature.title}</h3>
-                <p className="text-emerald-800/70 text-sm leading-relaxed">
+                <h3 className="font-serif font-semibold text-lg mb-2 text-emerald-900">{feature.title}</h3>
+                <p className="text-emerald-800/80 text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -88,8 +89,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="section-padding bg-emerald-50/30">
+      {/* Featured Products - tighter */}
+      <section className="py-12 bg-emerald-50/30">
         <div className="container-custom">
           <SectionHeading
             badge="Our Products"
@@ -97,13 +98,13 @@ const Home = () => {
             subtitle="Discover our premium dairy products, processed with 100% automation and zero human touch."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-8">
             <Link
               to="/products"
               className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-700 text-white rounded-full font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
@@ -115,11 +116,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Preview - Changed to green tones */}
-      <section className="section-padding bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
+      {/* About Preview - tighter */}
+      <section className="py-12 bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Image */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
                 <img
@@ -128,30 +128,31 @@ const Home = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-emerald-50 rounded-2xl p-6 shadow-card hidden md:block border border-emerald-200/50">
+              <div className="absolute -bottom-5 -right-5 bg-emerald-50 rounded-2xl p-5 shadow-card hidden md:block border border-emerald-200/50">
                 <p className="font-serif text-3xl font-bold text-emerald-800">2025</p>
                 <p className="text-emerald-700/70 text-sm">Established</p>
               </div>
             </div>
 
-            {/* Content */}
             <div>
               <SectionHeading
                 badge="Our Story"
                 title="A New Era of Dairy Hygiene"
                 align="left"
               />
-              <p className="body-md text-emerald-800/80 mb-6">
+              <p className="body-md text-emerald-800/80 mb-4">
                 Vizhis Dairy Farm represents the future of dairy production. As an emerging 
                 dairy farm established in 2025, we've embraced cutting-edge automation technology 
                 to ensure the highest standards of hygiene and safety.
               </p>
-              <p className="body-md text-emerald-800/80 mb-8">
+              <p className="body-md text-emerald-800/80 mb-6">
                 Our commitment to zero human contact processing, combined with ethical 
-                farming practices, makes us the new standard in premium dairy products. 
-                We're building trust one bottle at a time.
+                farming practices, makes us the new standard in premium dairy products.
               </p>
-              <Link to="/about" className="btn-hero inline-flex items-center gap-2 bg-emerald-700 text-white hover:bg-emerald-800">
+              <Link 
+                to="/about" 
+                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-700 text-white rounded-full font-medium hover:bg-emerald-800 transition-all"
+              >
                 Learn More
                 <ArrowRight size={18} />
               </Link>
@@ -160,14 +161,14 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-hero relative overflow-hidden">
+      {/* CTA - tighter */}
+      <section className="py-12 bg-gradient-hero relative overflow-hidden">
         <div className="absolute inset-0 bg-pattern-dots opacity-5" />
         <div className="container-custom relative z-10 text-center">
-          <h2 className="heading-lg text-primary-foreground mb-6">
+          <h2 className="heading-lg text-primary-foreground mb-5">
             Ready to Experience Pure Hygiene?
           </h2>
-          <p className="body-lg text-primary-foreground/85 max-w-2xl mx-auto mb-10">
+          <p className="body-lg text-primary-foreground/85 max-w-2xl mx-auto mb-8">
             Join families who are choosing the safest, most hygienic dairy products. 
             Order now and experience 100% automated, touchless processing.
           </p>

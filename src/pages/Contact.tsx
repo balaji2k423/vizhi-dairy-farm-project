@@ -130,9 +130,7 @@ const Contact = () => {
                     <Navigation className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    Annur Rd, to, Somanur Rd,<br />
-                    Karumathampatti, Kaduvettipalayam,<br />
-                    Coimbatore, Tamil Nadu 641659
+                    Coimbatore, Tamil Nadu 641001
                   </p>
                   <span className="inline-block mt-3 text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                     Click to navigate →
