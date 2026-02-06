@@ -1,6 +1,6 @@
 // src/pages/Products.tsx
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
 import type { Product } from "@/types";
 import productMilk from "@/assets/milkbottle.png";
@@ -24,7 +24,7 @@ const milkVariants = [
     id: "toned-milk",
     name: "Toned Milk",
     fat: "3% Fat",
-    description: "Balanced nutrition – perfect for daily consumption",
+    description: "Provides wholesome, balanced nutrition to support dietary needs",
     price: "₹54 / Litre",
     icon: Shield,
     image: productMilk,
@@ -181,12 +181,12 @@ const Products = () => {
                     <span className="text-xl font-semibold text-emerald-900">
                       {variant.price}
                     </span>
-                    <a
-                      href="/contact?order=true"
+                    <Link
+                      to={`/order?product=${encodeURIComponent(variant.name)}`}
                       className="px-5 py-2 bg-emerald-700 text-white rounded-lg text-sm font-medium hover:bg-emerald-800 transition-colors"
                     >
                       Order Now
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -259,12 +259,12 @@ const Products = () => {
             <p className="text-emerald-800/70 mb-6">
               Be the first to know when our new products become available.
             </p>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center px-8 py-3 rounded-full bg-emerald-700 text-white font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
             >
               Get Notified
-            </a>
+            </Link>
           </div>
         </div>
       </section>

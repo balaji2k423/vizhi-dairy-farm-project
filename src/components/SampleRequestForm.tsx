@@ -47,7 +47,7 @@ const OrderForm = () => {
     setSubmitStatus({ type: null, message: '' });
 
     try {
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwY6fQ5hJ6NL9kaJHwr12mWzeW1wbcibKzWGiMka6DciNLikjq1OjjVSMePxecN3J3IwA/exec';
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwNRPOaroUMZCJsUVymm7_kqQNI6j8i0lbBQAx7DLlFWzzgWwFD99BgvXGhNBtpRHAB/exec';
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',

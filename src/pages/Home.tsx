@@ -1,6 +1,6 @@
 // src/pages/Home.tsx
 import { Link } from "react-router-dom";
-import { Droplets, Truck, Award, Users, ArrowRight, Bot, Sparkles, Eye } from "lucide-react";
+import { Truck, Award, Bot, Sparkles, ArrowRight } from "lucide-react";
 import Hero from "@/components/Hero";
 import SectionHeading from "@/components/SectionHeading";
 import ProductCard from "@/components/ProductCard";
@@ -60,7 +60,7 @@ const Home = () => {
       {/* Hero */}
       <Hero />
 
-      {/* Features - tighter */}
+      {/* Features */}
       <section className="py-12 bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
         <div className="container-custom">
           <SectionHeading
@@ -89,7 +89,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Products - tighter */}
+      {/* Featured Products */}
       <section className="py-12 bg-emerald-50/30">
         <div className="container-custom">
           <SectionHeading
@@ -116,8 +116,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Preview - tighter */}
-      <section className="py-12 bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
+      {/* About Preview - Added extra space above (mt-16) */}
+      <section className="mt-16 py-12 bg-gradient-to-br from-emerald-100/70 via-emerald-50/60 to-teal-50/50">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="relative">
@@ -147,7 +147,8 @@ const Home = () => {
               </p>
               <p className="body-md text-emerald-800/80 mb-6">
                 Our commitment to zero human contact processing, combined with ethical 
-                farming practices, makes us the new standard in premium dairy products.
+                farming practices, makes us the new standard in premium dairy products. 
+                100% natural and organic — from farm to your home.
               </p>
               <Link 
                 to="/about" 
@@ -161,8 +162,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA - tighter */}
-      <section className="py-12 bg-gradient-hero relative overflow-hidden">
+      {/* CTA */}
+      <section className="py-16 bg-gradient-hero relative overflow-hidden">
         <div className="absolute inset-0 bg-pattern-dots opacity-5" />
         <div className="container-custom relative z-10 text-center">
           <h2 className="heading-lg text-primary-foreground mb-5">

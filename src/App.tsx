@@ -16,6 +16,7 @@ import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import DairyScan from "@/pages/DairyScan";
+import Order from "@/pages/Orders";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const App = () => {
                 <Route path="/dairyscan" element={<DairyScan />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/order" element={<Order />} />
               </Routes>
             </main>
             <Footer />
