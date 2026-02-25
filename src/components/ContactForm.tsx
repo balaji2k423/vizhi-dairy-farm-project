@@ -5,7 +5,13 @@ import type { ContactFormData } from "@/types";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  email: z
+  .string()
+  .trim()
+  .email("Invalid email address")
+  .max(255, "Email must be less than 255 characters")
+  .optional()
+  .or(z.literal("")),
   phone: z.string().trim().regex(/^[+]?[\d\s-]{10,15}$/, "Invalid phone number").optional().or(z.literal("")),
   message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
 });
@@ -98,8 +104,8 @@ const ContactForm = () => {
         {/* Email */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium mb-2">
-            Email Address <span className="text-destructive">*</span>
-          </label>
+  Email Address
+</label>
           <input
             type="email"
             id="email"

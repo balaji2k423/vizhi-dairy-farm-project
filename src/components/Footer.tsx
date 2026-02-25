@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="flex gap-3">
               {[
                 { icon: Facebook, label: "Facebook", link: "#" },
-                { icon: Instagram, label: "Instagram", link: "#" },
+                { icon: Instagram, label: "Instagram", link: "https://www.instagram.com/cow2home.cbe" },
                 { icon: Twitter, label: "Twitter", link: "#" },
               ].map(({ icon: Icon, label, link }) => (
                 <a
@@ -60,7 +60,9 @@ const Footer = () => {
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-emerald-500/30 transition-all duration-300 hover:scale-110 border border-white/10 hover:border-emerald-400/50"
+                  className={`w-9 h-9 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-emerald-500/30 transition-all duration-300 hover:scale-110 border border-white/10 hover:border-emerald-400/50 ${
+                    link === "#" ? "opacity-50 cursor-not-allowed pointer-events-none" : ""
+                  }`}
                   aria-label={label}
                 >
                   <Icon size={16} className="text-white" />
@@ -78,7 +80,7 @@ const Footer = () => {
             <ul className="space-y-2.5 text-sm">
               {[
                 { name: "Home", path: "/" },
-                { name: "About Us", path: "/about-us" },
+                { name: "About Us", path: "/about" },
                 { name: "Products", path: "/products" },
                 { name: "Gallery", path: "/gallery" },
                 { name: "Contact", path: "/contact" },
@@ -135,9 +137,8 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-emerald-400 mt-0.5 flex-shrink-0" />
                 <span className="text-primary-foreground/75 leading-relaxed">
-                 Coimbatore, Tamil Nadu 641659
-                 <br />
-                 
+                  Coimbatore, Tamil Nadu
+                  <br />
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -152,10 +153,10 @@ const Footer = () => {
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-emerald-400 flex-shrink-0" />
                 <a
-                  href="mailto:info@vizhidairy.com"
+                  href="mailto:support@cow2home.in"
                   className="text-primary-foreground/75 hover:text-emerald-300 transition-colors"
                 >
-                  info@vizhidairy.com
+                  support@cow2home.in
                 </a>
               </li>
             </ul>

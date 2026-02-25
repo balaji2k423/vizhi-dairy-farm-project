@@ -1,3 +1,4 @@
+// src/App.tsx
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -8,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SamplePopup from "@/components/SamplePopup";
+import ScrollToHash from "@/components/ScrollToHash";   // ← NEW
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -22,17 +24,14 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    const handleWheel = (e) => {
+    const handleWheel = (e: WheelEvent) => {
       if (e.ctrlKey) {
         e.preventDefault();
       }
     };
 
-    const handleKeyDown = (e) => {
-      if (
-        e.ctrlKey &&
-        (e.key === "+" || e.key === "-" || e.key === "=" || e.key === "0")
-      ) {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && (e.key === "+" || e.key === "-" || e.key === "=" || e.key === "0")) {
         e.preventDefault();
       }
     };
@@ -52,6 +51,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToHash />           {/* ← Added here */}
           <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-1">
@@ -62,8 +62,8 @@ const App = () => {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/dairyscan" element={<DairyScan />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
                 <Route path="/order" element={<Order />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />

@@ -21,19 +21,17 @@ const galleryImages: GalleryImage[] = [
 const Gallery = () => {
   return (
     <>
-      {/* Hero with cow background - same as your previous favorite version */}
+      {/* Hero with cow background */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
         <div className="absolute inset-0">
           <img
-            src={image6} // ← using image6 as the hero cow/farm background (same as before)
+            src={image6}
             alt="Vizhis Dairy Farm Hero - Cows and Farm"
             className="w-full h-full object-cover brightness-[0.65] scale-105 transition-transform duration-[20s] hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-emerald-900/40 to-transparent" />
         </div>
 
-        {/* Hero Content */}
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium tracking-widest text-emerald-200 uppercase bg-emerald-900/40 backdrop-blur-sm rounded-full border border-emerald-700/30">
             Gallery
@@ -47,7 +45,7 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Clean Gallery Grid (no filters) */}
+      {/* Gallery Grid */}
       <section className="py-16 md:py-24 bg-emerald-50/40">
         <div className="container-custom">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -65,7 +63,6 @@ const Gallery = () => {
                   />
                 </div>
 
-                {/* Subtle overlay caption on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
                   <div className="p-6 w-full">
                     <p className="text-white text-sm font-medium drop-shadow-md">
@@ -86,7 +83,7 @@ const Gallery = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-emerald-800 to-teal-900 text-white">
+      <section className="py-20 md:py-28 text-white" style={{ backgroundColor: "#6B7C3F" }}>
         <div className="container-custom text-center">
           <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 tracking-tight">
             Experience the Purity Yourself
@@ -96,7 +93,7 @@ const Gallery = () => {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-white text-emerald-900 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-white text-[#6B7C3F] rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             Schedule a Farm Visit
             <span className="text-xl">→</span>

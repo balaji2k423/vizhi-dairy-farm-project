@@ -9,7 +9,7 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   const isComingSoon = product.badge === "Coming Soon";
   
-  // Navigation logic: If coming soon (including curd), go to coming-soon section
+  // Navigation logic: If coming soon, go to coming-soon section
   // Otherwise go to milk-range section
   const getProductLink = () => {
     if (isComingSoon) {
@@ -58,9 +58,22 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </p>
         
         <div className="flex items-center justify-between pt-4 border-t border-emerald-200/50">
-          <span className="text-xl font-semibold text-emerald-900">
-            {product.price}
-          </span>
+          {/* Ghee: show strikethrough original + discounted */}
+          {product.originalPrice ? (
+            <div className="flex flex-col">
+              <span className="line-through text-emerald-500/70 text-xs">
+                {product.originalPrice}
+              </span>
+              <span className="text-xl font-semibold text-emerald-900">
+                {product.price}
+              </span>
+            </div>
+          ) : (
+            /* Regular milk: plain price, no strikethrough */
+            <span className="text-xl font-semibold text-emerald-900">
+              {product.price}
+            </span>
+          )}
           
           <Link
             to={getProductLink()}

@@ -1,4 +1,4 @@
-import { Leaf, Heart, Shield, Bot, Users, Droplets, Sparkles, Zap, CheckCircle, Lock } from "lucide-react";
+import { Leaf, Heart, Shield, Bot, Users, Droplets, Sparkles, Zap, CheckCircle, Lock, PackageCheck } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 // Import your custom images
 import aboutImage1 from "@/assets/img6.jpeg";
@@ -90,15 +90,15 @@ const processSteps = [
   },
   {
     number: "04",
-    title: "Sterile Packaging",
-    description: "Products are packaged in a completely sealed environment, maintaining freshness from farm to fridge.",
+    title: "Shrink Wrap Sealed",
+    description: "Every bottle is individually heat-shrink wrapped — a visible tamper-proof seal guaranteeing it has never been opened or touched.",
   },
 ];
 
 const About = () => {
   return (
     <>
-      {/* Hero Section - reduced padding */}
+      {/* Hero Section */}
       <section className="pt-28 pb-16 bg-gradient-to-br from-emerald-100/80 via-emerald-50/70 to-green-100/60">
         <div className="container-custom">
           <div className="text-center max-w-4xl mx-auto">
@@ -119,7 +119,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Hygiene Highlight Section - reduced padding */}
+      {/* Hygiene Highlight Section */}
       <section className="py-12 bg-gradient-to-br from-emerald-700 to-teal-700 text-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
@@ -127,77 +127,95 @@ const About = () => {
               <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-3">
                 <Bot className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                100% AUTOMATED
-              </h3>
-              <p className="text-white/90 text-sm">
-                Every single process handled by advanced machinery
-              </p>
+              <h3 className="text-xl font-bold text-white mb-2">100% AUTOMATED</h3>
+              <p className="text-white/90 text-sm">Every single process handled by advanced machinery</p>
             </div>
-
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-3">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                ZERO HUMAN TOUCH
-              </h3>
-              <p className="text-white/90 text-sm">
-                Complete elimination of human contact in production
-              </p>
+              <h3 className="text-xl font-bold text-white mb-2">ZERO HUMAN TOUCH</h3>
+              <p className="text-white/90 text-sm">Complete elimination of human contact in production</p>
             </div>
-
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-3">
                 <Shield className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                MAXIMUM HYGIENE
-              </h3>
-              <p className="text-white/90 text-sm">
-                Hospital-grade standards through automation
-              </p>
+              <h3 className="text-xl font-bold text-white mb-2">MAXIMUM HYGIENE</h3>
+              <p className="text-white/90 text-sm">Hospital-grade standards through automation</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Story Section - images smaller + tighter grid */}
+      {/* Shrink Wrap Section */}
+      <section className="py-12 bg-emerald-50/40">
+        <div className="container-custom">
+          <div className="bg-white rounded-2xl border border-emerald-200/50 shadow-soft overflow-hidden">
+            <div className="flex flex-col lg:flex-row items-center gap-0">
+
+              {/* Left accent strip */}
+              <div className="w-full lg:w-2 h-2 lg:h-auto self-stretch bg-emerald-600 flex-shrink-0" />
+
+              {/* Content */}
+              <div className="flex flex-col lg:flex-row items-center gap-8 p-8 flex-1">
+
+                {/* Icon */}
+                <div className="flex-shrink-0 w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center border border-emerald-200/60 shadow-sm">
+                  <PackageCheck className="w-10 h-10 text-emerald-700" />
+                </div>
+
+                {/* Text */}
+                <div className="flex-1 text-center lg:text-left">
+                  <span className="inline-block text-xs font-semibold text-emerald-700 uppercase tracking-widest mb-2">
+                    Tamper-Proof Packaging
+                  </span>
+                  <h3 className="font-serif font-bold text-2xl text-emerald-900 mb-2">
+                    Every Bottle Sealed with Shrink Wrap
+                  </h3>
+                  <p className="text-emerald-800/70 text-sm max-w-xl">
+                    Before leaving our facility, each bottle is individually heat-shrink wrapped — 
+                    a visible, tamper-proof guarantee that your product has never been opened or touched.
+                  </p>
+                </div>
+
+                {/* Badges */}
+                <div className="flex-shrink-0 flex flex-row lg:flex-col gap-3">
+                  {[
+                    { icon: Lock, label: "Tamper Evident" },
+                    { icon: Shield, label: "Sealed at Source" },
+                    { icon: CheckCircle, label: "Safe to Consume" },
+                  ].map((b) => (
+                    <div key={b.label} className="flex items-center gap-2 bg-emerald-50/80 border border-emerald-200/50 rounded-xl px-4 py-2.5">
+                      <b.icon className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span className="text-emerald-900 text-xs font-semibold whitespace-nowrap">{b.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Story Section */}
       <section className="py-12 bg-emerald-50/40">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-            {/* Images - now 3-column on large screens, smaller */}
             <div className="lg:col-span-2 grid grid-cols-3 gap-4">
               <div className="rounded-xl overflow-hidden shadow-md col-span-2">
-                <img
-                  src={aboutImage1}
-                  alt="Automated dairy facility"
-                  className="w-full h-48 object-cover"
-                />
+                <img src={aboutImage1} alt="Automated dairy facility" className="w-full h-48 object-cover" />
               </div>
               <div className="rounded-xl overflow-hidden shadow-md">
-                <img
-                  src={aboutImage2}
-                  alt="Modern dairy processing"
-                  className="w-full h-48 object-cover"
-                />
+                <img src={aboutImage2} alt="Modern dairy processing" className="w-full h-48 object-cover" />
               </div>
               <div className="rounded-xl overflow-hidden shadow-md col-span-3">
-                <img
-                  src={aboutImage3}
-                  alt="Pure milk bottle"
-                  className="w-full h-48 object-cover"
-                />
+                <img src={aboutImage3} alt="Pure milk bottle" className="w-full h-48 object-cover" />
               </div>
             </div>
-
-            {/* Text */}
             <div className="lg:col-span-3">
-              <SectionHeading
-                badge="Our Philosophy"
-                title="Redefining Dairy Purity"
-                align="left"
-              />
+              <SectionHeading badge="Our Philosophy" title="Redefining Dairy Purity" align="left" />
               <p className="body-lg text-muted-foreground mb-4">
                 At Vizhis Dairy Farm, we believe the cleanest milk comes from the cleanest process. 
                 That's why we've invested in full automation — not just for efficiency, but for 
@@ -212,7 +230,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Process Steps - reduced padding */}
+      {/* Process Steps */}
       <section className="py-12 bg-gradient-to-br from-emerald-100/60 via-emerald-50/70 to-green-100/50">
         <div className="container-custom">
           <SectionHeading
@@ -220,27 +238,37 @@ const About = () => {
             title="Our Automated Journey"
             subtitle="From pasture to package – every step is touchless and precisely controlled"
           />
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {processSteps.map((step) => (
               <div
                 key={step.number}
-                className="bg-white/70 backdrop-blur-sm rounded-xl p-5 text-center border border-emerald-200/40 hover:shadow-md transition-shadow"
+                className={`backdrop-blur-sm rounded-xl p-5 text-center border transition-shadow hover:shadow-md ${
+                  step.number === "04"
+                    ? "bg-emerald-900 border-emerald-700 shadow-lg"
+                    : "bg-white/70 border-emerald-200/40"
+                }`}
               >
-                <div className="text-5xl font-bold text-emerald-200/60 mb-3">{step.number}</div>
-                <h3 className="font-serif font-semibold text-lg mb-2 text-emerald-800">
+                <div className={`text-5xl font-bold mb-3 ${step.number === "04" ? "text-emerald-400/60" : "text-emerald-200/60"}`}>
+                  {step.number}
+                </div>
+                <h3 className={`font-serif font-semibold text-lg mb-2 ${step.number === "04" ? "text-white" : "text-emerald-800"}`}>
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground text-sm">
+                <p className={`text-sm ${step.number === "04" ? "text-emerald-200/80" : "text-muted-foreground"}`}>
                   {step.description}
                 </p>
+                {step.number === "04" && (
+                  <div className="mt-3 inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                    <PackageCheck className="w-3.5 h-3.5" /> Shrink Wrapped
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Automation Features - tighter grid */}
+      {/* Automation Features */}
       <section className="py-12 bg-emerald-50/50">
         <div className="container-custom">
           <SectionHeading
@@ -248,29 +276,21 @@ const About = () => {
             title="Automation That Matters"
             subtitle="Advanced systems working together to deliver unmatched hygiene and consistency"
           />
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {automationFeatures.map((feature) => (
-              <div
-                key={feature.title}
-                className="bg-white rounded-xl p-6 shadow-soft border border-emerald-200/50 hover:shadow-md transition-all duration-300"
-              >
+              <div key={feature.title} className="bg-white rounded-xl p-6 shadow-soft border border-emerald-200/50 hover:shadow-md transition-all duration-300">
                 <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
                   <feature.icon className="w-6 h-6 text-emerald-700" />
                 </div>
-                <h3 className="font-serif font-semibold text-lg mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {feature.description}
-                </p>
+                <h3 className="font-serif font-semibold text-lg mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Hygiene Standards - compact */}
+      {/* Hygiene Standards */}
       <section className="py-12 bg-emerald-50/40">
         <div className="container-custom max-w-4xl mx-auto">
           <SectionHeading
@@ -278,13 +298,9 @@ const About = () => {
             title="Our Hygiene Commitment"
             subtitle="Non-negotiable rules that define every aspect of our production"
           />
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {hygieneStandards.map((standard, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-3 bg-white/80 backdrop-blur-sm p-5 rounded-xl border border-emerald-200/40"
-              >
+              <div key={index} className="flex items-start gap-3 bg-white/80 backdrop-blur-sm p-5 rounded-xl border border-emerald-200/40">
                 <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
                 <p className="text-muted-foreground text-sm">{standard}</p>
               </div>
@@ -293,56 +309,43 @@ const About = () => {
         </div>
       </section>
 
-      {/* Core Values - tighter */}
+      {/* Core Values */}
       <section className="py-12 bg-emerald-50/50">
         <div className="container-custom">
-          <SectionHeading
-            badge="Our Values"
-            title="What Drives Us"
-            subtitle="The principles behind every decision we make"
-          />
-
+          <SectionHeading badge="Our Values" title="What Drives Us" subtitle="The principles behind every decision we make" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value) => (
-              <div
-                key={value.title}
-                className="bg-white rounded-xl p-6 shadow-soft border border-emerald-200/50 text-center hover:shadow-md transition-all duration-300"
-              >
+              <div key={value.title} className="bg-white rounded-xl p-6 shadow-soft border border-emerald-200/50 text-center hover:shadow-md transition-all duration-300">
                 <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
                   <value.icon className="w-7 h-7 text-emerald-700" />
                 </div>
-                <h3 className="font-serif font-semibold text-lg mb-2">
-                  {value.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {value.description}
-                </p>
+                <h3 className="font-serif font-semibold text-lg mb-2">{value.title}</h3>
+                <p className="text-muted-foreground text-sm">{value.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Quality Promise - reduced padding */}
+      {/* Quality Promise */}
       <section className="py-12 bg-gradient-to-br from-emerald-700 to-teal-700 text-white">
         <div className="container-custom">
           <div className="text-center max-w-4xl mx-auto">
-            <h2 className="heading-lg mb-5">
-              The Cleanest Dairy You'll Ever Find
-            </h2>
+            <h2 className="heading-lg mb-5">The Cleanest Dairy You'll Ever Find</h2>
             <p className="text-xl opacity-90 mb-6">
               We don't just meet hygiene standards - we've redefined them through complete automation.
             </p>
             <p className="body-lg opacity-85 mb-8">
               Every bottle carries our guarantee: processed entirely by machines in a sealed, 
-              sterilized environment, monitored continuously, and delivered with unmatched purity.
+              sterilized environment, monitored continuously, heat-shrink wrapped for tamper-proof safety, 
+              and delivered with unmatched purity.
             </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {[
                 { icon: Bot, label: "100% Machine Processed" },
                 { icon: Sparkles, label: "Zero Human Contact" },
                 { icon: Shield, label: "Maximum Safety" },
+                { icon: PackageCheck, label: "Shrink Wrap Sealed" },
               ].map((item) => (
                 <div key={item.label} className="flex flex-col items-center">
                   <div className="w-16 h-16 rounded-full bg-white/15 flex items-center justify-center mb-3">

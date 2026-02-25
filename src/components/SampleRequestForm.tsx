@@ -118,7 +118,6 @@ Sent from Vizhis Dairy Farm Website
   return (
     <div>
       <form onSubmit={handleSubmit} className="space-y-5 bg-emerald-50/60 backdrop-blur-sm rounded-2xl p-8 border border-emerald-200/50 shadow-soft">
-        {/* Name */}
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Full Name *
@@ -136,7 +135,6 @@ Sent from Vizhis Dairy Farm Website
           />
         </div>
 
-        {/* Phone */}
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Phone Number *
@@ -155,7 +153,6 @@ Sent from Vizhis Dairy Farm Website
           />
         </div>
 
-        {/* Email */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Email Address *
@@ -173,7 +170,6 @@ Sent from Vizhis Dairy Farm Website
           />
         </div>
 
-        {/* Address */}
         <div>
           <label htmlFor="address" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Delivery Address *
@@ -191,7 +187,6 @@ Sent from Vizhis Dairy Farm Website
           />
         </div>
 
-        {/* Product */}
         <div>
           <label htmlFor="product" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Select Milk *
@@ -214,7 +209,6 @@ Sent from Vizhis Dairy Farm Website
           </select>
         </div>
 
-        {/* Pack */}
         <div>
           <label htmlFor="pack" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Pack Size *
@@ -237,7 +231,6 @@ Sent from Vizhis Dairy Farm Website
           </select>
         </div>
 
-        {/* Quantity - Now Dropdown 1 to 10 */}
         <div>
           <label htmlFor="quantity" className="block text-sm font-medium text-emerald-900 mb-1.5">
             Quantity (packs) *
@@ -260,7 +253,6 @@ Sent from Vizhis Dairy Farm Website
           </select>
         </div>
 
-        {/* Status Message */}
         {submitStatus.type && (
           <div
             className={`p-4 rounded-lg text-sm font-medium ${
@@ -273,7 +265,6 @@ Sent from Vizhis Dairy Farm Website
           </div>
         )}
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={isSubmitting}

@@ -1,7 +1,7 @@
 // src/pages/Order.tsx
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ShoppingCart, User, Phone, MapPin, Building2, Home, Droplet, CheckCircle, ArrowLeft, Mail, ChevronDown, Package } from "lucide-react";
+import { ShoppingCart, User, Phone, MapPin, Building2, Home, Droplet, CheckCircle, ArrowLeft, Mail, ChevronDown, Package, Sparkles } from "lucide-react";
 
 interface OrderFormData {
   name: string;
@@ -35,19 +35,8 @@ const apartments = [
 ];
 
 const floorNumbers = [
-  "GROUND",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
+  "GROUND", "1", "2", "3", "4", "5",
+  "6", "7", "8", "9", "10", "11", "12",
 ];
 
 const quantities = ["500 ML", "1 Litre", "1.5 Litre"];
@@ -55,10 +44,10 @@ const quantities = ["500 ML", "1 Litre", "1.5 Litre"];
 const Order = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const pageTopRef = useRef<HTMLDivElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  // Replace with your Google Apps Script Web App URL
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNRPOaroUMZCJsUVymm7_kqQNI6j8i0lbBQAx7DLlFWzzgWwFD99BgvXGhNBtpRHAB/exec";
 
   const [formData, setFormData] = useState<OrderFormData>({
@@ -74,6 +63,8 @@ const Order = () => {
     productName: "",
   });
 
+  const isGhee = formData.productName.toLowerCase().includes("ghee");
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const product = params.get("product");
@@ -82,13 +73,17 @@ const Order = () => {
     }
   }, [location]);
 
+  // Scroll to top when success screen shows
+  useEffect(() => {
+    if (showSuccess) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [showSuccess]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -96,13 +91,10 @@ const Order = () => {
     setIsSubmitting(true);
 
     try {
-      // Send to Google Sheets
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           timestamp: new Date().toISOString(),
           name: formData.name,
@@ -113,7 +105,7 @@ const Order = () => {
           doorNo: formData.doorNo,
           block: formData.block,
           floorNo: formData.floorNo,
-          quantity: formData.quantity,
+          quantity: isGhee ? "N/A" : formData.quantity,
           productName: formData.productName,
         }),
       });
@@ -122,20 +114,13 @@ const Order = () => {
 
       setTimeout(() => {
         setFormData({
-          name: "",
-          contactNo: "",
-          email: "",
-          apartmentName: "",
-          address: "",
-          doorNo: "",
-          block: "",
-          floorNo: "",
-          quantity: "",
-          productName: "",
+          name: "", contactNo: "", email: "",
+          apartmentName: "", address: "", doorNo: "",
+          block: "", floorNo: "", quantity: "", productName: "",
         });
         setShowSuccess(false);
         navigate("/products");
-      }, 3000);
+      }, 4000);
     } catch (error) {
       console.error("Error submitting order:", error);
       alert("There was an error submitting your order. Please try again.");
@@ -146,31 +131,65 @@ const Order = () => {
 
   if (showSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-sage-light/40 to-green-50/50 flex items-center justify-center p-6">
-        <div className="bg-white rounded-3xl p-12 shadow-2xl text-center max-w-md border border-emerald-200/50">
-          <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-12 h-12 text-emerald-600" />
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-emerald-100/60 to-teal-50 flex items-center justify-center p-6">
+        <div className="relative bg-white rounded-3xl p-12 shadow-2xl text-center max-w-md border border-emerald-200/50 overflow-hidden">
+
+          {/* Animated background circles */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-emerald-100/60 animate-ping" style={{ animationDuration: "2.5s" }} />
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-teal-100/60 animate-ping" style={{ animationDuration: "3s", animationDelay: "0.5s" }} />
           </div>
-          <h2 className="text-3xl font-serif font-bold text-emerald-900 mb-4">
-            Order Placed Successfully!
-          </h2>
-          <p className="text-emerald-700 mb-6">
-            Thank you for your order. We'll contact you shortly!
-          </p>
-          <div className="animate-pulse flex justify-center">
-            <div className="flex space-x-2">
-              <div className="w-3 h-3 bg-emerald-600 rounded-full"></div>
-              <div className="w-3 h-3 bg-emerald-600 rounded-full"></div>
-              <div className="w-3 h-3 bg-emerald-600 rounded-full"></div>
+
+          {/* Checkmark with ripple */}
+          <div className="relative flex items-center justify-center mx-auto mb-6 w-24 h-24">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-200 opacity-60 animate-ping" style={{ animationDuration: "1.8s" }} />
+            <div className="relative w-24 h-24 rounded-full bg-emerald-100 flex items-center justify-center shadow-lg">
+              <CheckCircle className="w-14 h-14 text-emerald-600" strokeWidth={1.8} />
             </div>
           </div>
+
+          {/* Floating sparkles */}
+          <div className="absolute top-10 right-12 animate-bounce" style={{ animationDuration: "1.4s" }}>
+            <Sparkles className="w-5 h-5 text-emerald-400" />
+          </div>
+          <div className="absolute top-16 left-10 animate-bounce" style={{ animationDuration: "1.8s", animationDelay: "0.3s" }}>
+            <Sparkles className="w-4 h-4 text-teal-400" />
+          </div>
+
+          <h2 className="text-3xl font-serif font-bold text-emerald-900 mb-3 relative">
+            Order Placed!
+          </h2>
+          <p className="text-emerald-700 mb-2 font-medium relative">
+            Thank you, {formData.name || "there"}! 🎉
+          </p>
+          <p className="text-emerald-600/80 text-sm mb-8 relative">
+            We'll contact you shortly to confirm your order.
+          </p>
+
+          {/* Progress bar */}
+          <div className="relative w-full h-1.5 bg-emerald-100 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-emerald-500 rounded-full"
+              style={{
+                animation: "progressBar 4s linear forwards",
+              }}
+            />
+          </div>
+          <p className="text-xs text-emerald-500 mt-2">Redirecting to products...</p>
         </div>
+
+        <style>{`
+          @keyframes progressBar {
+            from { width: 0%; }
+            to { width: 100%; }
+          }
+        `}</style>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-sage-light/40 to-green-50/50">
+    <div ref={pageTopRef} className="min-h-screen bg-gradient-to-br from-emerald-50 via-sage-light/40 to-green-50/50">
       {/* Header */}
       <section className="pt-32 pb-12">
         <div className="container-custom max-w-4xl">
@@ -201,7 +220,8 @@ const Order = () => {
       <section className="pb-20">
         <div className="container-custom max-w-3xl">
           <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-emerald-200/50">
-            {/* Product Name (if provided) */}
+
+            {/* Product Name */}
             {formData.productName && (
               <div className="mb-8 p-4 bg-emerald-50 rounded-xl border border-emerald-200/50">
                 <p className="text-sm text-emerald-700 mb-1">Selected Product:</p>
@@ -219,7 +239,6 @@ const Order = () => {
               </h3>
 
               <div className="space-y-5">
-                {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-emerald-900 mb-2">
                     Full Name <span className="text-red-500">*</span>
@@ -237,7 +256,6 @@ const Order = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {/* Contact Number */}
                   <div>
                     <label htmlFor="contactNo" className="block text-sm font-semibold text-emerald-900 mb-2">
                       Contact Number <span className="text-red-500">*</span>
@@ -255,7 +273,6 @@ const Order = () => {
                     />
                   </div>
 
-                  {/* Email */}
                   <div>
                     <label htmlFor="email" className="block text-sm font-semibold text-emerald-900 mb-2">
                       Email Address <span className="text-red-500">*</span>
@@ -283,7 +300,6 @@ const Order = () => {
               </h3>
 
               <div className="space-y-5">
-                {/* Apartment Name */}
                 <div className="relative">
                   <label htmlFor="apartmentName" className="block text-sm font-semibold text-emerald-900 mb-2">
                     Apartment Name <span className="text-red-500">*</span>
@@ -299,16 +315,13 @@ const Order = () => {
                     >
                       <option value="">Select your apartment</option>
                       {apartments.map((apt) => (
-                        <option key={apt} value={apt}>
-                          {apt}
-                        </option>
+                        <option key={apt} value={apt}>{apt}</option>
                       ))}
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-600 pointer-events-none" />
                   </div>
                 </div>
 
-                {/* Address */}
                 <div>
                   <label htmlFor="address" className="block text-sm font-semibold text-emerald-900 mb-2">
                     Complete Address <span className="text-red-500">*</span>
@@ -325,7 +338,6 @@ const Order = () => {
                   />
                 </div>
 
-                {/* Door No and Block - Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="doorNo" className="block text-sm font-semibold text-emerald-900 mb-2">
@@ -359,7 +371,6 @@ const Order = () => {
                   </div>
                 </div>
 
-                {/* Floor Number */}
                 <div className="relative">
                   <label htmlFor="floorNo" className="block text-sm font-semibold text-emerald-900 mb-2">
                     Floor Number <span className="text-red-500">*</span>
@@ -375,9 +386,7 @@ const Order = () => {
                     >
                       <option value="">Select floor</option>
                       {floorNumbers.map((floor) => (
-                        <option key={floor} value={floor}>
-                          {floor}
-                        </option>
+                        <option key={floor} value={floor}>{floor}</option>
                       ))}
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-600 pointer-events-none" />
@@ -386,39 +395,39 @@ const Order = () => {
               </div>
             </div>
 
-            {/* Order Details */}
-            <div className="mb-8">
-              <h3 className="text-xl font-serif font-bold text-emerald-900 mb-6 flex items-center gap-2">
-                <Droplet className="w-5 h-5 text-emerald-600" />
-                Order Details
-              </h3>
+            {/* Order Details — hidden for ghee */}
+            {!isGhee && (
+              <div className="mb-8">
+                <h3 className="text-xl font-serif font-bold text-emerald-900 mb-6 flex items-center gap-2">
+                  <Droplet className="w-5 h-5 text-emerald-600" />
+                  Order Details
+                </h3>
 
-              <div className="relative">
-                <label htmlFor="quantity" className="block text-sm font-semibold text-emerald-900 mb-2">
-                  Quantity <span className="text-red-500">*</span>
-                </label>
                 <div className="relative">
-                  <select
-                    id="quantity"
-                    name="quantity"
-                    value={formData.quantity}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-xl border-2 border-emerald-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-emerald-900 appearance-none cursor-pointer pr-10"
-                  >
-                    <option value="">Select quantity</option>
-                    {quantities.map((qty) => (
-                      <option key={qty} value={qty}>
-                        {qty}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-600 pointer-events-none" />
+                  <label htmlFor="quantity" className="block text-sm font-semibold text-emerald-900 mb-2">
+                    Quantity <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="quantity"
+                      name="quantity"
+                      value={formData.quantity}
+                      onChange={handleChange}
+                      required={!isGhee}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-emerald-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-emerald-900 appearance-none cursor-pointer pr-10"
+                    >
+                      <option value="">Select quantity</option>
+                      {quantities.map((qty) => (
+                        <option key={qty} value={qty}>{qty}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-600 pointer-events-none" />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting}
@@ -445,10 +454,7 @@ const Order = () => {
       </section>
 
       <style>{`
-        /* Ensure dropdown opens downwards */
-        select {
-          background-image: none !important;
-        }
+        select { background-image: none !important; }
       `}</style>
     </div>
   );

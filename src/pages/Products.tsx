@@ -8,7 +8,7 @@ import productCurd from "@/assets/product-curd.jpg";
 import productGhee from "@/assets/product-ghee.jpg";
 import productButter from "@/assets/product-butter.jpg";
 import productPaneer from "@/assets/product-paneer.jpg";
-import { Clock, Sparkles, Shield, Leaf, Droplet } from "lucide-react";
+import { Clock, Sparkles, Shield, Leaf, Droplet, Star } from "lucide-react";
 
 const milkVariants = [
   {
@@ -56,6 +56,39 @@ const milkVariants = [
     icon: Sparkles,
     image: productMilk,
   },
+  {
+    id: "pure-ghee-200",
+    name: "Pure Ghee",
+    fat: null,
+    volume: "200 ml",
+    description: "Golden, aromatic ghee made from the finest butter using the traditional bilona method.",
+    originalPrice: "₹290",
+    price: "₹220",
+    icon: Star,
+    image: productGhee,
+  },
+  {
+    id: "pure-ghee-500",
+    name: "Pure Ghee",
+    fat: null,
+    volume: "500 ml",
+    description: "Golden, aromatic ghee made from the finest butter using the traditional bilona method.",
+    originalPrice: "₹590",
+    price: "₹550",
+    icon: Star,
+    image: productGhee,
+  },
+  {
+    id: "pure-ghee-1000",
+    name: "Pure Ghee",
+    fat: null,
+    volume: "1000 ml",
+    description: "Golden, aromatic ghee made from the finest butter using the traditional bilona method.",
+    originalPrice: "₹1290",
+    price: "₹1090",
+    icon: Star,
+    image: productGhee,
+  },
 ];
 
 const comingSoonProducts = [
@@ -66,14 +99,6 @@ const comingSoonProducts = [
     price: "₹80/500g",
     image: productCurd,
     category: "Curd",
-  },
-  {
-    id: "ghee",
-    name: "Pure Desi Ghee",
-    description: "Golden, aromatic ghee made from the finest butter using the traditional bilona method.",
-    price: "₹650/500g",
-    image: productGhee,
-    category: "Ghee",
   },
   {
     id: "butter",
@@ -158,7 +183,7 @@ const Products = () => {
                     className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-3 right-3 bg-emerald-700 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                    Available Now
+                    {variant.volume ?? "Available Now"}
                   </div>
                 </div>
 
@@ -171,23 +196,50 @@ const Products = () => {
                       <h3 className="font-serif font-semibold text-lg text-emerald-900">
                         {variant.name}
                       </h3>
-                      <p className="text-sm text-emerald-700 font-medium">{variant.fat}</p>
+                      {variant.fat && (
+                        <p className="text-sm text-emerald-700 font-medium">~{variant.fat}</p>
+                      )}
+                      {variant.volume && (
+                        <p className="text-sm text-emerald-700 font-medium">{variant.volume}</p>
+                      )}
                     </div>
                   </div>
                   <p className="text-emerald-800/70 text-sm mb-4 line-clamp-2">
                     {variant.description}
                   </p>
-                  <div className="flex items-center justify-between pt-3 border-t border-emerald-200/50">
-                    <span className="text-xl font-semibold text-emerald-900">
-                      {variant.price}
-                    </span>
-                    <Link
-                      to={`/order?product=${encodeURIComponent(variant.name)}`}
-                      className="px-5 py-2 bg-emerald-700 text-white rounded-lg text-sm font-medium hover:bg-emerald-800 transition-colors"
-                    >
-                      Order Now
-                    </Link>
-                  </div>
+
+                  {/* Ghee: strikethrough + discounted price */}
+                  {variant.originalPrice ? (
+                    <div className="flex items-center justify-between pt-3 border-t border-emerald-200/50">
+                      <div className="flex flex-col">
+                        <span className="line-through text-emerald-500/70 text-xs">
+                          {variant.originalPrice}
+                        </span>
+                        <span className="text-xl font-semibold text-emerald-900">
+                          {variant.price}
+                        </span>
+                      </div>
+                      <Link
+                        to={`/order?product=${encodeURIComponent(variant.name + " " + variant.volume)}`}
+                        className="px-5 py-2 bg-emerald-700 text-white rounded-lg text-sm font-medium hover:bg-emerald-800 transition-colors"
+                      >
+                        Order Now
+                      </Link>
+                    </div>
+                  ) : (
+                    /* Regular milk: plain price, no strikethrough */
+                    <div className="flex items-center justify-between pt-3 border-t border-emerald-200/50">
+                      <span className="text-xl font-semibold text-emerald-900">
+                        {variant.price}
+                      </span>
+                      <Link
+                        to={`/order?product=${encodeURIComponent(variant.name)}`}
+                        className="px-5 py-2 bg-emerald-700 text-white rounded-lg text-sm font-medium hover:bg-emerald-800 transition-colors"
+                      >
+                        Order Now
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -307,7 +359,7 @@ const Products = () => {
                 { value: "100%", label: "Natural & Pure" },
                 { value: "0", label: "Human Touch" },
                 { value: "24h", label: "Farm to Door" },
-                { value: "5", label: "Milk Variants" },
+                { value: "8", label: "Products Available" },
               ].map((stat) => (
                 <div key={stat.label} className="bg-primary-foreground/15 backdrop-blur-sm rounded-2xl p-6 text-center border border-primary-foreground/10">
                   <p className="text-5xl font-bold text-primary-foreground mb-2">

@@ -32,7 +32,6 @@ const Header = () => {
     setIsMenuOpen(false);
   }, [location]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -56,7 +55,6 @@ const Header = () => {
     return "bg-transparent";
   };
 
-  // Handle navigation click - scroll to top
   const handleNavClick = () => {
     setIsMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -71,9 +69,8 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <nav className="flex items-center justify-between">
-            {/* Logo with Smooth Cross-Fade Transition */}
+            {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group relative z-20" onClick={handleNavClick}>
-              {/* New Logo (homepage before scroll) */}
               <img 
                 src="/logo1.png" 
                 alt="Vizhis Dairy Farm Logo" 
@@ -86,7 +83,6 @@ const Header = () => {
                 }`}
               />
               
-              {/* Old Logo (scrolled or other pages) */}
               <img 
                 src="/logo.png" 
                 alt="Vizhis Dairy Farm Logo" 
@@ -98,7 +94,7 @@ const Header = () => {
               />
             </Link>
 
-            {/* Desktop Navigation - Enhanced for larger screens */}
+            {/* Desktop Navigation */}
             <ul className="hidden lg:flex items-center gap-4 xl:gap-8">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -117,7 +113,7 @@ const Header = () => {
               ))}
             </ul>
 
-            {/* Desktop CTA Buttons - Enhanced spacing for Mac */}
+            {/* Desktop CTA Buttons */}
             <div className="hidden lg:flex items-center gap-2 xl:gap-3">
               <a
                 href="tel:+918680050504"
@@ -128,7 +124,7 @@ const Header = () => {
                 <span className="xl:hidden">Call</span>
               </a>
               <Link
-                to="/contact?sample=true"
+                to="/contact#sample-request"  // ← Updated here
                 onClick={handleNavClick}
                 className="inline-flex items-center gap-2 px-4 xl:px-5 py-2 xl:py-2.5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-medium text-sm tracking-wide shadow-md hover:from-emerald-700 hover:to-sage-dark hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
               >
@@ -138,7 +134,7 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Mobile Menu Toggle - Creative Morphing Button */}
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`lg:hidden relative p-2 transition-all duration-300 z-20 ${
@@ -158,7 +154,7 @@ const Header = () => {
             </button>
           </nav>
 
-          {/* Mobile Navigation - Enhanced scroll handling */}
+          {/* Mobile Navigation */}
           {isMenuOpen && (
             <div 
               className={`lg:hidden mt-4 sm:mt-6 transition-all duration-300 pb-20 sm:pb-24 max-h-[calc(100vh-120px)] overflow-y-auto ${
@@ -167,7 +163,6 @@ const Header = () => {
                   : "border-t border-gray-200 pt-4"
               }`}
             >
-              {/* Decorative divider line */}
               {isHomePage && (
                 <div className="mb-4 sm:mb-6 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
               )}
@@ -192,7 +187,6 @@ const Header = () => {
                           : "text-gray-800 hover:text-emerald-700"
                       }`}
                     >
-                      {/* Animated underline on hover/active */}
                       <span className={`absolute bottom-0 left-4 sm:left-6 right-4 sm:right-6 h-px bg-gradient-to-r transition-all duration-300 ${
                         isHomePage && isMenuOpen
                           ? location.pathname === item.href
@@ -201,7 +195,6 @@ const Header = () => {
                           : 'from-emerald-600 via-emerald-400 to-transparent opacity-0'
                       }`}></span>
                       
-                      {/* Active indicator - elegant dot */}
                       {location.pathname === item.href && (
                         <span className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 sm:h-8 rounded-r-full transition-all duration-500 ${
                           isHomePage && isMenuOpen 
@@ -210,12 +203,10 @@ const Header = () => {
                         }`}></span>
                       )}
                       
-                      {/* Hover glow effect */}
                       {isHomePage && isMenuOpen && location.pathname !== item.href && (
                         <span className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-all duration-300 rounded-lg -mx-2"></span>
                       )}
                       
-                      {/* Letter spacing animation on hover */}
                       <span className={`relative z-10 inline-block transition-all duration-300 ${
                         location.pathname === item.href ? 'tracking-wide' : 'tracking-normal group-hover:tracking-wide'
                       } ${
@@ -224,7 +215,6 @@ const Header = () => {
                         {item.label}
                       </span>
 
-                      {/* Subtle chevron for active item */}
                       {location.pathname === item.href && isHomePage && isMenuOpen && (
                         <span className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 text-white/60 text-xs animate-pulse">
                           ●
@@ -235,7 +225,6 @@ const Header = () => {
                 ))}
               </ul>
 
-              {/* Bottom decorative divider */}
               {isHomePage && (
                 <div className="mt-4 sm:mt-6 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
               )}
@@ -243,7 +232,6 @@ const Header = () => {
           )}
         </div>
 
-        {/* Ambient glow effect that pulses */}
         {isMenuOpen && isHomePage && (
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="absolute top-0 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-white/5 rounded-full blur-3xl animate-pulse-slow"></div>
@@ -252,7 +240,7 @@ const Header = () => {
         )}
       </header>
 
-      {/* Fixed Bottom Buttons for Mobile/Tablet Only - Enhanced for better touch targets */}
+      {/* Fixed Bottom Buttons for Mobile/Tablet */}
       <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-gradient-to-t from-white via-white to-white/95 backdrop-blur-sm p-3 sm:p-4 z-50 border-t border-gray-100 safe-area-inset-bottom">
         <div className="container mx-auto px-4 sm:px-6 max-w-lg">
           <div className="flex gap-2 sm:gap-3">
@@ -264,7 +252,7 @@ const Header = () => {
               <span className="hidden xs:inline">Call</span>
             </a>
             <Link
-              to="/contact?sample=true"
+              to="/contact#sample-request"   // ← Updated here too
               onClick={handleNavClick}
               className="flex-1 flex items-center justify-center gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-full font-semibold text-sm transition-all bg-gradient-to-r from-emerald-600 to-emerald-700 text-white hover:from-emerald-700 hover:to-sage-dark shadow-lg hover:shadow-xl active:scale-95"
             >
@@ -275,88 +263,33 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Enhanced Animations with better performance */}
       <style>{`
         @keyframes fade-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
-
         @keyframes slide-in {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          from { opacity: 0; transform: translateX(-30px); }
+          to { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes pulse-slow {
-          0%, 100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.5;
-            transform: scale(1.1);
-          }
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(1.1); }
         }
-
-        .animate-fade-in {
-          animation: fade-in 0.4s ease-out forwards;
-        }
-
-        .animate-slide-in {
-          animation: slide-in 0.4s ease-out forwards;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-
-        /* Safe area for iOS devices with notch */
-        .safe-area-inset-bottom {
-          padding-bottom: env(safe-area-inset-bottom);
-        }
-
-        /* Custom scrollbar for mobile menu (Mac-like) */
+        .animate-fade-in { animation: fade-in 0.4s ease-out forwards; }
+        .animate-slide-in { animation: slide-in 0.4s ease-out forwards; }
+        .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+        .safe-area-inset-bottom { padding-bottom: env(safe-area-inset-bottom); }
         @media (max-width: 1023px) {
-          .lg\:hidden.overflow-y-auto::-webkit-scrollbar {
-            width: 6px;
-          }
-          
-          .lg\:hidden.overflow-y-auto::-webkit-scrollbar-track {
-            background: transparent;
-          }
-          
-          .lg\:hidden.overflow-y-auto::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 3px;
-          }
-          
-          .lg\:hidden.overflow-y-auto::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
-          }
+          .lg\\:hidden.overflow-y-auto::-webkit-scrollbar { width: 6px; }
+          .lg\\:hidden.overflow-y-auto::-webkit-scrollbar-track { background: transparent; }
+          .lg\\:hidden.overflow-y-auto::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 3px; }
+          .lg\\:hidden.overflow-y-auto::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
         }
-
-        /* Smooth scrolling for all browsers */
         html {
           scroll-behavior: smooth;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Better touch interaction on Mac trackpads */
-        @media (hover: hover) and (pointer: fine) {
-          .group:hover .group-hover\:opacity-100 {
-            transition: opacity 0.3s ease;
-          }
         }
       `}</style>
     </>
