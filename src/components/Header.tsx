@@ -43,8 +43,6 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
-  const showOldLogo = (isScrolled && isHomePage) || !isHomePage;
-
   const getMobileHeaderClass = () => {
     if (isMenuOpen && isHomePage) {
       return "bg-gradient-to-br from-emerald-600/20 via-sage-dark/15 to-emerald-800/20 backdrop-blur-3xl shadow-2xl border-b border-white/10";
@@ -69,28 +67,16 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <nav className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group relative z-20" onClick={handleNavClick}>
+            {/* Logo - Only one logo, no animation */}
+            <Link 
+              to="/" 
+              className="flex items-center gap-3 group relative z-20" 
+              onClick={handleNavClick}
+            >
               <img 
                 src="/logo1.png" 
-                alt="Vizhis Dairy Farm Logo" 
-                className={`h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto object-contain transition-all duration-700 ease-in-out ${
-                  isMenuOpen && isHomePage ? 'drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]' : ''
-                } ${
-                  showOldLogo 
-                    ? 'opacity-0 scale-75 absolute' 
-                    : 'opacity-100 scale-100 relative'
-                }`}
-              />
-              
-              <img 
-                src="/logo.png" 
-                alt="Vizhis Dairy Farm Logo" 
-                className={`h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-all duration-700 ease-in-out ${
-                  showOldLogo 
-                    ? 'opacity-100 scale-100 relative' 
-                    : 'opacity-0 scale-125 absolute'
-                }`}
+                alt="cow2home" 
+                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
@@ -124,7 +110,7 @@ const Header = () => {
                 <span className="xl:hidden">Call</span>
               </a>
               <Link
-                to="/contact#sample-request"  // ← Updated here
+                to="/contact#sample-request"
                 onClick={handleNavClick}
                 className="inline-flex items-center gap-2 px-4 xl:px-5 py-2 xl:py-2.5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-medium text-sm tracking-wide shadow-md hover:from-emerald-700 hover:to-sage-dark hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
               >
@@ -252,7 +238,7 @@ const Header = () => {
               <span className="hidden xs:inline">Call</span>
             </a>
             <Link
-              to="/contact#sample-request"   // ← Updated here too
+              to="/contact#sample-request"
               onClick={handleNavClick}
               className="flex-1 flex items-center justify-center gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-full font-semibold text-sm transition-all bg-gradient-to-r from-emerald-600 to-emerald-700 text-white hover:from-emerald-700 hover:to-sage-dark shadow-lg hover:shadow-xl active:scale-95"
             >
