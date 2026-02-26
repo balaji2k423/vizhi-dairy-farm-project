@@ -64,7 +64,6 @@ const DairyScan = () => {
       };
 
       setTodayReport(report);
-      console.log("Fetched report with file URL:", report.fileUrl);
     } catch (err) {
       console.error("Error fetching report:", err);
       setError("Unable to load today's report. Please try again later.");
@@ -79,43 +78,33 @@ const DairyScan = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Extract file ID from various Google Drive URL formats
   const getFileId = (url: string) => {
     if (!url) return null;
-    
     const patterns = [
       /\/d\/([a-zA-Z0-9_-]+)/,
       /id=([a-zA-Z0-9_-]+)/,
       /\/file\/d\/([a-zA-Z0-9_-]+)/,
       /^([a-zA-Z0-9_-]{25,})$/
     ];
-    
     for (const pattern of patterns) {
       const match = url.match(pattern);
-      if (match && match[1]) {
-        return match[1];
-      }
+      if (match && match[1]) return match[1];
     }
-    
     return null;
   };
 
-  // Get direct image URL for display
   const getImageUrl = (url: string) => {
     const fileId = getFileId(url);
     if (!fileId) return null;
-    // This URL works for public images
     return `https://drive.google.com/uc?export=view&id=${fileId}`;
   };
 
-  // Get thumbnail URL as fallback
   const getThumbnailUrl = (url: string) => {
     const fileId = getFileId(url);
     if (!fileId) return null;
     return `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000`;
   };
 
-  // Get PDF viewer URL
   const getViewerUrl = (url: string) => {
     const fileId = getFileId(url);
     if (!fileId) return null;
@@ -134,7 +123,6 @@ const DairyScan = () => {
     return `https://drive.google.com/file/d/${fileId}/view`;
   };
 
-  // Determine if the file is an image or PDF
   const isImageFile = (fileName: string) => {
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'];
     return imageExtensions.some(ext => fileName.toLowerCase().endsWith(ext));
@@ -163,7 +151,6 @@ const DairyScan = () => {
                 <Shield className="w-4 h-4 text-accent" />
                 <span className="text-xs font-semibold text-accent uppercase tracking-wider">FSSAI Certified</span>
               </div>
-              
               <div className="hidden lg:flex flex-col text-right text-xs text-muted-foreground">
                 <span>GST: 33ABCDE1234F1Z5</span>
                 <span>CIN: U01100TZ2024PTC012345</span>
@@ -290,7 +277,6 @@ const DairyScan = () => {
                 <div className="aspect-[4/5] bg-ivory relative">
                   {todayReport.fileUrl && getFileId(todayReport.fileUrl) ? (
                     <>
-                      {/* Try to display as image first */}
                       {isImageFile(todayReport.fileName) || !isPdfFile(todayReport.fileName) ? (
                         <>
                           {imageLoading && (
@@ -302,13 +288,8 @@ const DairyScan = () => {
                             src={getImageUrl(todayReport.fileUrl) || ""}
                             alt="Lab Report"
                             className={`w-full h-full object-contain ${imageLoading ? 'hidden' : 'block'}`}
-                            onLoad={() => {
-                              setImageLoading(false);
-                              setImageError(false);
-                            }}
+                            onLoad={() => { setImageLoading(false); setImageError(false); }}
                             onError={() => {
-                              console.error("Image failed to load, trying thumbnail...");
-                              // Try thumbnail as fallback
                               const img = document.getElementById('report-img') as HTMLImageElement;
                               if (img && getThumbnailUrl(todayReport.fileUrl)) {
                                 img.src = getThumbnailUrl(todayReport.fileUrl) || "";
@@ -321,7 +302,6 @@ const DairyScan = () => {
                           />
                         </>
                       ) : (
-                        /* PDF iframe */
                         !imageError ? (
                           <iframe 
                             src={getViewerUrl(todayReport.fileUrl) || ""}
@@ -329,16 +309,11 @@ const DairyScan = () => {
                             title="Today's Lab Report"
                             allow="autoplay"
                             onLoad={() => setImageLoading(false)}
-                            onError={() => {
-                              console.error("iframe failed to load");
-                              setImageError(true);
-                              setImageLoading(false);
-                            }}
+                            onError={() => { setImageError(true); setImageLoading(false); }}
                           />
                         ) : null
                       )}
                       
-                      {/* Fallback if image/PDF fails to load */}
                       {imageError && (
                         <div className="absolute inset-0 flex flex-col items-center justify-center p-10 bg-background">
                           <div className="w-24 h-32 border-2 border-border rounded-sm mb-6 flex items-center justify-center bg-muted">
@@ -350,13 +325,8 @@ const DairyScan = () => {
                           <p className="text-muted-foreground text-center max-w-sm mb-4">
                             Preview unavailable. The file may need public sharing enabled in Google Drive.
                           </p>
-                          
                           {getDirectViewUrl(todayReport.fileUrl) && (
-                            <a 
-                              href={getDirectViewUrl(todayReport.fileUrl) || ""}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                            <a href={getDirectViewUrl(todayReport.fileUrl) || ""} target="_blank" rel="noopener noreferrer">
                               <Button className="bg-primary hover:bg-primary/90">
                                 <Eye className="w-4 h-4 mr-2" />
                                 Open in Google Drive
@@ -380,7 +350,6 @@ const DairyScan = () => {
                     </div>
                   )}
 
-                  {/* Corner decorations */}
                   <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-accent/50"></div>
                   <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-accent/50"></div>
                   <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-accent/50"></div>
@@ -400,11 +369,7 @@ const DairyScan = () => {
                   {todayReport.fileUrl && (
                     <div className="flex gap-3">
                       {getDirectViewUrl(todayReport.fileUrl) && (
-                        <a 
-                          href={getDirectViewUrl(todayReport.fileUrl) || ""}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <a href={getDirectViewUrl(todayReport.fileUrl) || ""} target="_blank" rel="noopener noreferrer">
                           <Button variant="outline" size="sm" className="border-border hover:border-primary">
                             <ExternalLink className="w-4 h-4 mr-2" />
                             Open
@@ -426,17 +391,47 @@ const DairyScan = () => {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-32 text-center">
-            <div className="w-20 h-28 border-2 border-border rounded-sm mb-6 flex items-center justify-center bg-muted">
-              <span className="font-serif text-3xl text-muted-foreground/40">PDF</span>
+          /* ── NO DATA: friendly "coming soon" state ── */
+          <div className="flex flex-col items-center justify-center py-32 text-center max-w-lg mx-auto">
+            {/* Icon with spinning indicator */}
+            <div className="relative mb-8">
+              <div className="w-24 h-24 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <Shield className="w-12 h-12 text-primary/50" />
+              </div>
+              <span className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-accent flex items-center justify-center shadow-md">
+                <RefreshCw className="w-4 h-4 text-accent-foreground" style={{ animation: "spin 3s linear infinite" }} />
+              </span>
             </div>
-            <h3 className="font-serif text-2xl font-semibold text-foreground mb-2">
-              No Report Available
+
+            <h3 className="font-serif text-3xl font-semibold text-foreground mb-3">
+              Report Coming Soon
             </h3>
-            <p className="text-muted-foreground mb-6">
-              Today's quality report hasn't been uploaded yet.
+            <p className="text-muted-foreground text-base mb-2">
+              Today's quality verification report will be available shortly.
             </p>
+            <p className="text-muted-foreground/70 text-sm mb-8 leading-relaxed">
+              Our lab tests are conducted fresh every morning. Results are published 
+              as soon as they're certified — please check back soon.
+            </p>
+
+            {/* Pulsing status dots */}
+            <div className="flex items-center gap-8 mb-8 text-sm">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="uppercase tracking-widest text-xs">Lab in Progress</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <div className="w-2 h-2 rounded-full bg-primary/40" />
+                <span className="uppercase tracking-widest text-xs">Daily Tested</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <div className="w-2 h-2 rounded-full bg-primary/40" />
+                <span className="uppercase tracking-widest text-xs">FSSAI Certified</span>
+              </div>
+            </div>
+
             <Button onClick={fetchTodayReport} className="bg-primary hover:bg-primary/90">
+              <RefreshCw className="w-4 h-4 mr-2" />
               Check Again
             </Button>
           </div>
